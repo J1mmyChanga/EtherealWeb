@@ -1,4 +1,6 @@
 import sqlalchemy
+from sqlalchemy import orm
+
 from .db_session import SqlAlchemyBase
 
 
@@ -6,4 +8,6 @@ class Type(SqlAlchemyBase):
     __tablename__ = 'type'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
-    name = sqlalchemy.Column(sqlalchemy.String,)
+    type = sqlalchemy.Column(sqlalchemy.String)
+
+    clothes = orm.relationship("Clothes", back_populates='types')

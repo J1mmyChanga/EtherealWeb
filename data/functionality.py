@@ -11,3 +11,5 @@ class Functionality(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     functionality = sqlalchemy.Column(sqlalchemy.String)
+
+    clothes = orm.relationship("Clothes", back_populates='functionalities')

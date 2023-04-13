@@ -10,3 +10,7 @@ class Season(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     season = sqlalchemy.Column(sqlalchemy.String)
+    look_season = sqlalchemy.Column(sqlalchemy.String)
+
+    clothes = orm.relationship("Clothes", back_populates='seasons')
+    looks = orm.relationship("Looks", back_populates='seasons')
