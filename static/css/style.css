@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('https://fonts.google.com/specimen/Lato');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('https://fonts.google.com/specimen/Open+Sans');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('https://fonts.google.com/specimen/Roboto');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+}

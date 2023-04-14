@@ -9,5 +9,3 @@ class Type(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     type = sqlalchemy.Column(sqlalchemy.String)
-
-    #clothes = orm.relationship("Clothes", back_populates='types')

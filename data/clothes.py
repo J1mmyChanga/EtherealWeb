@@ -17,5 +17,3 @@ class Clothes(SqlAlchemyBase):
     functionalities = orm.relationship("Functionality", backref='clothes')
     types = orm.relationship("Type", backref='clothes')
     seasons = orm.relationship("Season", backref='clothes')
-
-    #looks = orm.relationship("Looks", back_populates='clothes')
