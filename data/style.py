@@ -10,4 +10,4 @@ class Style(SqlAlchemyBase):
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     style = sqlalchemy.Column(sqlalchemy.String)
 
-    looks = orm.relationship("Looks", back_populates='styles')
+    #looks = orm.relationship("Looks", back_populates='styles')

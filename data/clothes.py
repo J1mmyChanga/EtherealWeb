@@ -14,8 +14,8 @@ class Clothes(SqlAlchemyBase):
     season = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("season.id"))
     image = sqlalchemy.Column(sqlalchemy.BLOB, nullable=True)
 
-    functionalities = orm.relationship("Functionality")
-    types = orm.relationship("Type")
-    seasons = orm.relationship("Season")
+    functionalities = orm.relationship("Functionality", backref='clothes')
+    types = orm.relationship("Type", backref='clothes')
+    seasons = orm.relationship("Season", backref='clothes')
 
-    looks = orm.relationship("Looks", back_populates='clothes')
+    #looks = orm.relationship("Looks", back_populates='clothes')

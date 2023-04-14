@@ -14,6 +14,6 @@ class Looks(SqlAlchemyBase):
     second = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("clothes.id"))
     lower = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("clothes.id"))
 
-    styles = orm.relationship("Style")
-    seasons = orm.relationship("Season")
-    clothes = orm.relationship("Clothes")
+    styles = orm.relationship("Style", backref='looks')
+    seasons = orm.relationship("Season", backref='looks')
+    clothes = orm.relationship("Clothes", backref='looks', foreign_keys=[first])

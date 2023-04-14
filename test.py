@@ -4,6 +4,7 @@ from data.looks import Looks
 from data.season import Season
 from data.style import Style
 from data.type import Type
+from data.users import Users
 
 season1 = Season(id=1, season='Лето', look_season='Летний')
 session.add(season1)
@@ -68,6 +69,8 @@ c34 = Clothes(id=34, name='Дублёнка', type=1, func=1, season=2)
 c35 = Clothes(id=35, name='Рубашка(короткий рукав)', type=1, func=2, season=1)
 c36 = Clothes(id=36, name='Брюки', type=2, func=1, season=4)
 c37 = Clothes(id=37, name='Джинсы(утеплённые)', type=2, func=1, season=2)
+for i in range(1, 38):
+    session.add(eval(f'c{i}'))
 
 l1 = Looks(id=1, style=2, season=1, first=32, second=20, lower=36)
 l2 = Looks(id=2, style=2, season=1, second=20, lower=17)
@@ -97,3 +100,8 @@ l25 = Looks(id=25, style=2, season=4, first=4, second=15, lower=36)
 l26 = Looks(id=26, style=2, season=4, first=4, second=10, lower=30)
 l27 = Looks(id=27, style=2, season=4, first=6, second=20, lower=29)
 l28 = Looks(id=28, style=1, season=4, first=33, second=21, lower=36)
+for i in range(1, 29):
+    session.add(eval(f'l{i}'))
+
+user1 = Users(name='test', nickname='test', email='test', hashed_password='test')
+session.add(user1)

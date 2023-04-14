@@ -14,15 +14,15 @@ class Users(SqlAlchemyBase, UserMixin):
     nickname = sqlalchemy.Column(sqlalchemy.String)
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String)
-    image = sqlalchemy.Column(sqlalchemy.BLOB)
+    image = sqlalchemy.Column(sqlalchemy.BLOB, nullable=True)
 
-    user_looks = orm.relationship("Looks",
+    looks = orm.relationship("Looks",
                             secondary="user_to_favourite",
-                            backref="user")
+                            backref="users")
 
-    user_clothes = orm.relationship("Clothes",
+    clothes = orm.relationship("Clothes",
                              secondary="user_to_clothes",
-                             backref="user")
+                             backref="users")
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
