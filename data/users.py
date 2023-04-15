@@ -10,19 +10,21 @@ class Users(SqlAlchemyBase, UserMixin):
     __tablename__ = 'users'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
-    name = sqlalchemy.Column(sqlalchemy.String)
+    sex = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("sex.id"))
     nickname = sqlalchemy.Column(sqlalchemy.String)
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String)
     image = sqlalchemy.Column(sqlalchemy.BLOB, nullable=True)
 
+    sex_ = orm.relationship("Sex", backref="users")
+
     looks = orm.relationship("Looks",
                             secondary="user_to_favourite",
-                            backref="users")
+                            backref="user")
 
     clothes = orm.relationship("Clothes",
                              secondary="user_to_clothes",
-                             backref="users")
+                             backref="user")
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)

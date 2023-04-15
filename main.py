@@ -1,3 +1,6 @@
+import io
+
+from PIL import Image
 from flask import Flask, render_template, redirect
 from flask_login import LoginManager, login_required, logout_user, login_user
 
@@ -6,6 +9,7 @@ from data.clothes import Clothes
 from data.functionality import Functionality
 from data.looks import Looks
 from data.season import Season
+from data.sex import Sex
 from data.style import Style
 from data.type import Type
 from data.users import Users
@@ -50,16 +54,19 @@ def register():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
+
         user = Users(
             email=form.email.data,
-            name=form.name.data,
+            sex=form.sex.data,
             nickname=form.nickname.data,
+            image=convert_to_binary(form.image.data)
         )
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -74,6 +81,15 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
+
+
+def convert_to_binary(img):
+    image = Image.open(img)
+    byte_stream = io.BytesIO()
+    image.save(byte_stream, format='JPEG')
+    byte_image = byte_stream.getvalue()
+    return byte_image
+
 
 def main():
     db_session.global_init('db/ethereal.db')
