@@ -18,3 +18,12 @@ class LoginForm(FlaskForm):
     password = PasswordField('Пароль', validators=[DataRequired()])
     remember_me = BooleanField('Запомнить меня')
     submit = SubmitField('Войти')
+
+
+class EditForm(FlaskForm):
+    email = EmailField('Почта')
+    password = PasswordField('Пароль')
+    password_again = PasswordField('Повторите пароль')
+    nickname = StringField('Никнейм')
+    image = FileField('Выберите аватар')
+    submit = SubmitField('Сохранить')

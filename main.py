@@ -1,8 +1,8 @@
 import io
 
 from PIL import Image
-from flask import Flask, render_template, redirect
-from flask_login import LoginManager, login_required, logout_user, login_user
+from flask import Flask, render_template, redirect, url_for
+from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 
 from data import db_session
 from data.clothes import Clothes
@@ -14,7 +14,7 @@ from data.style import Style
 from data.type import Type
 from data.users import Users
 
-from forms.user import RegisterForm, LoginForm
+from forms.user import RegisterForm, LoginForm, EditForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -58,14 +58,45 @@ def register():
         user = Users(
             email=form.email.data,
             sex=form.sex.data,
-            nickname=form.nickname.data,
-            image=convert_to_binary(form.image.data)
+            nickname=form.nickname.data
         )
+        if form.image.data:
+            user.image = convert_to_binary(form.image.data)
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
+
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+def edit_profile():
+    form = EditForm()
+    db_sess = db_session.create_session()
+    user = db_sess.get(Users, current_user.id)
+    if form.validate_on_submit():
+        if form.password.data != form.password_again.data:
+            return render_template('edit_profile.html', title='Личные данные',
+                                   form=form,
+                                   message="Пароли не совпадают")
+        if form.nickname.data:
+            user.nickname = form.nickname.data
+        if form.image.data:
+            user.image = convert_to_binary(form.image.data)
+        if form.password.data:
+            user.set_password(form.password.data)
+
+        db_sess.commit()
+        print(user.image)
+        return redirect('/')
+    else:
+        form.nickname.data = user.nickname
+        form.email.data = user.email
+        if user.image:
+            path_to_img = convert_to_image(user.image)
+        else:
+            path_to_img = ''
+    return render_template('edit_profile.html', title='Личные данные', form=form, img=path_to_img)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -86,9 +117,15 @@ def login():
 def convert_to_binary(img):
     image = Image.open(img)
     byte_stream = io.BytesIO()
-    image.save(byte_stream, format='JPEG')
+    image.save(byte_stream, format=F'JPEG')
     byte_image = byte_stream.getvalue()
     return byte_image
+
+
+def convert_to_image(bytes_array):
+    img = Image.open(io.BytesIO(bytes_array))
+    img.save(url_for('static', filename=f'img/avatars/image{current_user.id}.jpg')[1:])
+    return f"{url_for('static', filename=f'img/avatars/image{current_user.id}.jpg')}"
 
 
 def main():
