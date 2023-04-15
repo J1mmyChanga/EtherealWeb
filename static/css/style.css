@@ -1,31 +1,52 @@
 @font-face {
   font-family: 'Montserrat';
-  src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+  src: url('https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_dJE3gnD-w.ttf');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Lato';
-  src: url('https://fonts.google.com/specimen/Lato');
+  src: url('https://fonts.gstatic.com/s/lato/v21/S6uyw4BMUTPHjx4wXg.woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url('https://fonts.google.com/specimen/Open+Sans');
+  src: url('https://fonts.gstatic.com/s/opensans/v23/mem8YaGs126MiZpBA-UFVZ0e.ttf');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url('https://fonts.google.com/specimen/Roboto');
+  src: url('https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxP.ttf');
   font-weight: normal;
   font-style: normal;
 }
 
-h1 {
+.navbar {
+  height: 78px;
+}
+
+.navbar h1 {
   font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+.navbar .a_nav {
+  font-size: 24px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar .btn {
+  font-size: 21px;
+  padding: 6px 16px;
+}
+
+.navbar .nickname {
+  font-size: 27px;
+  font-weight: bold;
 }
