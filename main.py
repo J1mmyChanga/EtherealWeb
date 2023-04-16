@@ -26,7 +26,11 @@ login_manager.init_app(app)
 def index():
     param = {}
     param['title'] = 'Главная'
-    return render_template("index.html", **param)
+    session = db_session.create_session()
+    clothes = session.query(Users).get(current_user.id).clothes
+    path = url_for('static', filename='img/clothes_def')
+    print(path)
+    return render_template("index.html", **param, clothes=clothes, path=path)
 
 @app.route('/logout')
 @login_required
@@ -87,7 +91,6 @@ def edit_profile():
             user.set_password(form.password.data)
 
         db_sess.commit()
-        print(user.image)
         return redirect('/')
     else:
         form.nickname.data = user.nickname
@@ -117,15 +120,15 @@ def login():
 def convert_to_binary(img):
     image = Image.open(img)
     byte_stream = io.BytesIO()
-    image.save(byte_stream, format=F'JPEG')
+    image.save(byte_stream, format=F'PNG')
     byte_image = byte_stream.getvalue()
     return byte_image
 
 
 def convert_to_image(bytes_array):
     img = Image.open(io.BytesIO(bytes_array))
-    img.save(url_for('static', filename=f'img/avatars/image{current_user.id}.jpg')[1:])
-    return f"{url_for('static', filename=f'img/avatars/image{current_user.id}.jpg')}"
+    img.save(url_for('static', filename=f'img/avatars/image{current_user.id}.png')[1:])
+    return f"{url_for('static', filename=f'img/avatars/image{current_user.id}.png')}"
 
 
 def main():
