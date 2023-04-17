@@ -1,7 +1,7 @@
 import io
 
 from PIL import Image
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 
 from data import db_session
@@ -15,6 +15,7 @@ from data.type import Type
 from data.users import Users
 
 from forms.user import RegisterForm, LoginForm, EditForm
+from forms.clothes import ClothesForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -29,8 +30,26 @@ def index():
     session = db_session.create_session()
     clothes = session.query(Users).get(current_user.id).clothes
     path = url_for('static', filename='img/clothes_def')
-    print(path)
     return render_template("index.html", **param, clothes=clothes, path=path)
+
+
+@app.route('/add_clothes', methods=['GET', 'POST'])
+def add_clothes():
+    form = ClothesForm()
+    clothes = []
+    path = url_for('static', filename='img/clothes_def')
+    selected_item_id = None
+    if form.validate_on_submit():
+        session = db_session.create_session()
+        user = session.get(Users, current_user.id)
+        clothes = session.query(Clothes).filter(Clothes.type == form.type.data,
+                                                Clothes.func == form.functionality.data,
+                                                Clothes.season == form.season.data).all()
+        selected_item_id = request.form.get('item_id')
+        if selected_item_id:
+            user.clothes.append(session.get(Clothes, selected_item_id))
+            session.commit()
+    return render_template('add_clothes.html', title='Добавление одежды', form=form, clothes=clothes, path=path, selected_item_id=selected_item_id)
 
 @app.route('/logout')
 @login_required

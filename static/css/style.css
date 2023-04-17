@@ -94,3 +94,11 @@ form.login_form {
     border-radius: 5px;
     padding: 10px;
 }
+
+.item-image {
+  display: none;
+}
+
+input[type=radio]:checked + label + img {
+  display: block;
+}
