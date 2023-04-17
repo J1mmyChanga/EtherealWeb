@@ -23,17 +23,28 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 @app.route('/')
 def index():
     param = {}
     param['title'] = 'Главная'
     session = db_session.create_session()
+    return render_template("index.html", **param)
+
+
+@app.route('/wardrobe', methods=['GET', 'POST'])
+@login_required
+def wardrobe():
+    param = {}
+    param['title'] = 'Мой гардероб'
+    session = db_session.create_session()
     clothes = session.query(Users).get(current_user.id).clothes
     path = url_for('static', filename='img/clothes_def')
-    return render_template("index.html", **param, clothes=clothes, path=path)
+    return render_template("wardrobe.html", **param, clothes=clothes, path=path)
 
 
 @app.route('/add_clothes', methods=['GET', 'POST'])
+@login_required
 def add_clothes():
     form = ClothesForm()
     clothes = []
@@ -51,17 +62,15 @@ def add_clothes():
             session.commit()
     return render_template('add_clothes.html', title='Добавление одежды', form=form, clothes=clothes, path=path, selected_item_id=selected_item_id)
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect("/")
 
-
-@login_manager.user_loader
-def load_user(user_id):
+@app.route('/looks', methods=['GET', 'POST'])
+def looks():
+    param = {}
+    param['title'] = 'Мои образы'
     session = db_session.create_session()
-    return session.get(Users, user_id)
+    clothes = session.query(Users).get(current_user.id).clothes
+    path = url_for('static', filename='img/clothes_def')
+    return render_template("wardrobe.html", **param, clothes=clothes, path=path)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -93,6 +102,7 @@ def register():
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
 def edit_profile():
     form = EditForm()
     db_sess = db_session.create_session()
@@ -149,6 +159,18 @@ def convert_to_image(bytes_array):
     img.save(url_for('static', filename=f'img/avatars/image{current_user.id}.png')[1:])
     return f"{url_for('static', filename=f'img/avatars/image{current_user.id}.png')}"
 
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    session = db_session.create_session()
+    return session.get(Users, user_id)
 
 def main():
     db_session.global_init('db/ethereal.db')

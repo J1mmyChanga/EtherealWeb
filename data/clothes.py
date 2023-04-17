@@ -12,7 +12,7 @@ class Clothes(SqlAlchemyBase):
     type = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("functionality.id"))
     func = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("type.id"))
     season = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("season.id"))
-    image = sqlalchemy.Column(sqlalchemy.BLOB, nullable=True)
+    image = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     functionalities = orm.relationship("Functionality", backref='clothes')
     types = orm.relationship("Type", backref='clothes')

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>
+<h1 class="text-center">Мой гардероб</h1>
+</p>
+{% for item in clothes%}
+    <table style="float: left; margin: 10px; width: 400px; border-radius: 10px; overflow: hidden;">
+        <tr style="background-color: #dddddd; text-align: center; height: 50px;">
+            <th>{{item.name}}</th>
+        <tr style="background-color: #ffffff; text-align: center; height: 350px;">
+            <td><image src="{{path}}/{{item.id}}.png" style="height: 350px; width: 400px;"></image></td>
+        </tr>
+    </table>
+{% endfor %}
+<div style="clear: both;"></div>
+{% endblock %}

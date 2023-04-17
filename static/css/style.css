@@ -70,6 +70,14 @@
   opacity: 1;
 }
 
+.navbar .a_nav .active {
+  font-weight: bold;
+}
+
+.navbar .a_nav .active::after {
+  opacity: 1;
+}
+
 .navbar .btn {
   font-size: 21px;
   padding: 6px 16px;
