@@ -9,11 +9,9 @@ class Clothes(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     name = sqlalchemy.Column(sqlalchemy.String)
-    type = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("functionality.id"))
-    func = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("type.id"))
+    type = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("type.id"))
     season = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("season.id"))
     image = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
-    functionalities = orm.relationship("Functionality", backref='clothes')
     types = orm.relationship("Type", backref='clothes')
     seasons = orm.relationship("Season", backref='clothes')

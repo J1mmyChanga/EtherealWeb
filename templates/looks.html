@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p><h1 style="text-align: center;">Мои образы</h1><p>
+<div class="casual">
+  <a class="btn btn-secondary">
+    Свободный стиль
+    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#casual" aria-expanded="false" aria-controls="casual"></button>
+  </a>
+  </p>
+  <div class="collapse" id="casual">
+    <div class="card card-body">
+      Некоторый заполнитель для компонента сворачивания. Эта панель по умолчанию скрыта, но открывается, когда пользователь активирует соответствующий триггер.
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="sportswear">
+  <a class="btn btn-secondary">
+    Деловой стиль
+    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#sportswear" aria-expanded="false" aria-controls="sportswear"></button>
+  </a>
+  </p>
+  <div class="collapse" id="sportswear">
+    <div class="card card-body">
+      Некоторый заполнитель для компонента сворачивания. Эта панель по умолчанию скрыта, но открывается, когда пользователь активирует соответствующий триггер.
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="formal">
+  <a class="btn btn-secondary">
+    Спортивный стиль
+    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#formal" aria-expanded="false" aria-controls="formal"></button>
+  </a>
+  </p>
+  <div class="collapse" id="formal">
+    <div class="card card-body">
+      Некоторый заполнитель для компонента сворачивания. Эта панель по умолчанию скрыта, но открывается, когда пользователь активирует соответствующий триггер.
+    </div>
+  </div>
+</div>
+{% endblock %}

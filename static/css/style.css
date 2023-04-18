@@ -70,14 +70,6 @@
   opacity: 1;
 }
 
-.navbar .a_nav .active {
-  font-weight: bold;
-}
-
-.navbar .a_nav .active::after {
-  opacity: 1;
-}
-
 .navbar .btn {
   font-size: 21px;
   padding: 6px 16px;
@@ -109,4 +101,22 @@ form.login_form {
 
 input[type=radio]:checked + label + img {
   display: block;
+}
+
+.panel {
+  border: 1px solid black;
+  transition: max-height 0.5s ease-out;
+  max-height: 1000px; /* значение должно быть достаточным для отображения всего содержимого */
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.panel-toggle {
+  cursor: pointer;
 }

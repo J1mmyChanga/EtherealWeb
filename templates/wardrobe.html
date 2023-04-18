@@ -4,14 +4,93 @@
 <p>
 <h1 class="text-center">Мой гардероб</h1>
 </p>
-{% for item in clothes%}
-    <table style="float: left; margin: 10px; width: 400px; border-radius: 10px; overflow: hidden;">
-        <tr style="background-color: #dddddd; text-align: center; height: 50px;">
-            <th>{{item.name}}</th>
-        <tr style="background-color: #ffffff; text-align: center; height: 350px;">
-            <td><image src="{{path}}/{{item.id}}.png" style="height: 350px; width: 400px;"></image></td>
-        </tr>
-    </table>
-{% endfor %}
-<div style="clear: both;"></div>
+<div class="outer">
+  <a class="btn btn-secondary rounded-pill btn-sm">
+    Верхняя
+    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#outer" aria-expanded="false" aria-controls="outer"></button>
+  </a>
+  </p>
+  <div class="collapse" id="outer">
+    <div class="card card-body">
+      <div class="card-container" style="display: flex; flex-wrap: wrap;">
+        {% for item in outer%}
+          <div class="card" style="width: 400px; margin: 10px; overflow: hidden;">
+            <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{item.name}}</div>
+            <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px;" class="mx-auto mt-4">
+            <div class="card-body">
+                <div class="collapse" id="item_{{item.id}}">
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Тип: {{item.types.type}}</li>
+                      <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
+                  </ul>
+                  <button type="button" class="btn-close m-2 mt-1" aria-label="Закрыть"></button>
+                </div>
+                <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="top">
+  <a class="btn btn-secondary rounded-pill btn-sm">
+    Верхняя лёгкая
+    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#top" aria-expanded="false" aria-controls="top"></button>
+  </a>
+  </p>
+  <div class="collapse" id="top">
+    <div class="card card-body">
+      <div class="card-container" style="display: flex; flex-wrap: wrap;">
+        {% for item in top%}
+          <div class="card" style="width: 400px; margin: 10px; overflow: hidden;">
+            <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{item.name}}</div>
+            <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px;" class="mx-auto mt-4">
+            <div class="card-body">
+                <div class="collapse" id="item_{{item.id}}">
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Тип: {{item.types.type}}</li>
+                      <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
+                  </ul>
+                  <button type="button" class="btn-close m-2 mt-1" aria-label="Закрыть"></button>
+                </div>
+                <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="lower">
+  <a class="btn btn-secondary rounded-pill btn-sm">
+    Поясная
+    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#lower" aria-expanded="false" aria-controls="lower"></button>
+  </a>
+  </p>
+  <div class="collapse" id="lower">
+    <div class="card card-body">
+      <div class="card-container" style="display: flex; flex-wrap: wrap;">
+        {% for item in lower%}
+          <div class="card" style="width: 400px; margin: 10px; overflow: hidden;">
+            <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{item.name}}</div>
+            <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px;" class="mx-auto mt-4">
+            <div class="card-body">
+                <div class="collapse" id="item_{{item.id}}">
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Тип: {{item.types.type}}</li>
+                      <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
+                  </ul>
+                  <button type="button" class="btn-close m-2 mt-1" aria-label="Закрыть"></button>
+                </div>
+                <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

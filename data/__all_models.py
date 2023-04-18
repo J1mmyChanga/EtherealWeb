@@ -1,4 +1,3 @@
-from . import functionality
 from . import style
 from . import type
 from . import season

@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<p>
 <h1 style="text-align: center;">Добавление одежды</h1>
+</p>
 <form action="" method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <div class="row">
@@ -9,14 +11,6 @@
             <p>
                 {{ form.type.label }} {{ form.type(class="no-bullet") }}<br>
                 {% for error in form.type.errors %}
-                    <p class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </p>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.functionality.label }} {{ form.functionality(class="no-bullet") }}<br>
-                {% for error in form.functionality.errors %}
                     <p class="alert alert-danger" role="alert">
                         {{ error }}
                     </p>
@@ -41,7 +35,7 @@
                     <p>
                         <input type="radio" id="item_{{item.id}}" name="item_id" value="{{item.id}}">
                         <label for="item_{{item.id}}">{{item.name}}</label>
-                        <img src="{{path}}/{{item.id}}.png" style="height: 350px; width: 400px; margin-left: 20px;" class="item-image">
+                        <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px; margin-left: 20px;" class="item-image">
                     </p>
                 {% endfor %}
                 <br>

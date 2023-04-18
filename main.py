@@ -6,7 +6,6 @@ from flask_login import LoginManager, login_required, logout_user, login_user, c
 
 from data import db_session
 from data.clothes import Clothes
-from data.functionality import Functionality
 from data.looks import Looks
 from data.season import Season
 from data.sex import Sex
@@ -28,49 +27,61 @@ login_manager.init_app(app)
 def index():
     param = {}
     param['title'] = 'Главная'
-    session = db_session.create_session()
     return render_template("index.html", **param)
 
 
-@app.route('/wardrobe', methods=['GET', 'POST'])
+@app.route('/wardrobe')
 @login_required
 def wardrobe():
     param = {}
     param['title'] = 'Мой гардероб'
+    param['outer'] = []
+    param['top'] = []
+    param['lower'] = []
     session = db_session.create_session()
-    clothes = session.query(Users).get(current_user.id).clothes
-    path = url_for('static', filename='img/clothes_def')
-    return render_template("wardrobe.html", **param, clothes=clothes, path=path)
+    clothes = session.get(Users, current_user.id).clothes
+    for item in clothes:
+        if item.type == 1:
+            param['outer'].append(item)
+        elif item.type == 2:
+            param['top'].append(item)
+        else:
+            param['lower'].append(item)
+    param['path'] = url_for('static', filename='img/clothes_def')
+    return render_template("wardrobe.html", **param)
 
 
 @app.route('/add_clothes', methods=['GET', 'POST'])
 @login_required
 def add_clothes():
     form = ClothesForm()
+    param = {}
     clothes = []
-    path = url_for('static', filename='img/clothes_def')
-    selected_item_id = None
     if form.validate_on_submit():
         session = db_session.create_session()
         user = session.get(Users, current_user.id)
         clothes = session.query(Clothes).filter(Clothes.type == form.type.data,
-                                                Clothes.func == form.functionality.data,
                                                 Clothes.season == form.season.data).all()
         selected_item_id = request.form.get('item_id')
         if selected_item_id:
             user.clothes.append(session.get(Clothes, selected_item_id))
             session.commit()
-    return render_template('add_clothes.html', title='Добавление одежды', form=form, clothes=clothes, path=path, selected_item_id=selected_item_id)
+    param['title'] = 'Добавление одежды'
+    param['clothes'] = clothes
+    param['form'] = form
+    param['path'] = url_for('static', filename='img/clothes_def')
+    return render_template('add_clothes.html', **param)
 
 
-@app.route('/looks', methods=['GET', 'POST'])
+@app.route('/looks')
+@login_required
 def looks():
     param = {}
-    param['title'] = 'Мои образы'
     session = db_session.create_session()
     clothes = session.query(Users).get(current_user.id).clothes
-    path = url_for('static', filename='img/clothes_def')
-    return render_template("wardrobe.html", **param, clothes=clothes, path=path)
+    param['title'] = 'Мои образы'
+    param['path'] = url_for('static', filename='img/clothes_def')
+    return render_template("looks.html", **param)
 
 
 @app.route('/register', methods=['GET', 'POST'])
