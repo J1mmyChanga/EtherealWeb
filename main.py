@@ -45,7 +45,7 @@ def wardrobe():
             param['outer'].append(item)
         elif item.type == 2:
             param['top'].append(item)
-        else:
+        elif item.type == 3:
             param['lower'].append(item)
     param['path'] = url_for('static', filename='img/clothes_def')
     return render_template("wardrobe.html", **param)
@@ -77,8 +77,29 @@ def add_clothes():
 @login_required
 def looks():
     param = {}
+    looks = []
+    param['casual'] = []
+    param['business'] = []
+    param['sportswear'] = []
     session = db_session.create_session()
     clothes = session.query(Users).get(current_user.id).clothes
+    for look in session.query(Looks).all():
+        item_list = []
+        for item in look.clothes:
+            if item in clothes:
+                item_list.append(item)
+                continue
+            else:
+                break
+        if len(item_list) >= 2:
+            looks.append(look)
+    for item in looks:
+        if item.style == 1:
+            param['business'].append(item)
+        elif item.style == 2:
+            param['casual'].append(item)
+        elif item.style == 3:
+            param['sportswear'].append(item)
     param['title'] = 'Мои образы'
     param['path'] = url_for('static', filename='img/clothes_def')
     return render_template("looks.html", **param)
