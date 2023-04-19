@@ -19,12 +19,12 @@ class Users(SqlAlchemyBase, UserMixin):
     sex_ = orm.relationship("Sex", backref="users")
 
     looks = orm.relationship("Looks",
-                            secondary="user_to_favourite",
-                            backref="user")
+                             secondary="user_to_favourite",
+                             backref="user")
 
     clothes = orm.relationship("Clothes",
-                             secondary="user_to_clothes",
-                             backref="user")
+                               secondary="user_to_clothes",
+                               backref="user")
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)

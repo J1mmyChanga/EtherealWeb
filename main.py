@@ -1,6 +1,7 @@
 import io
 
 from PIL import Image
+from flask_restful import Api
 from flask import Flask, render_template, redirect, url_for, request
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 
@@ -15,12 +16,16 @@ from data.users import Users
 
 from forms.user import RegisterForm, LoginForm, EditForm
 from forms.clothes import ClothesForm
+from resources import LoginResource
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+api = Api(app)
+api.add_resource(LoginResource, "/api/login/")
 
 
 @app.route('/')
@@ -204,11 +209,13 @@ def load_user(user_id):
     session = db_session.create_session()
     return session.get(Users, user_id)
 
+
 def main():
     db_session.global_init('db/ethereal.db')
     session = db_session.create_session()
     session.commit()
-    app.run(port=8080, host='127.0.0.1')
+    app.run(port=8080, host='0.0.0.0')
+
 
 if __name__ == '__main__':
     main()
