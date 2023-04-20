@@ -4,17 +4,17 @@ from wtforms.validators import DataRequired
 
 
 class RegisterForm(FlaskForm):
-    email = EmailField('Почта', validators=[DataRequired()])
+    email = EmailField('Адрес электронной почты', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     password_again = PasswordField('Повторите пароль', validators=[DataRequired()])
-    sex = RadioField('Пол:', choices=[(1, 'Мужской'), (2, 'Женский')], validators=[DataRequired()])
-    nickname = StringField('Никнейм', validators=[DataRequired()])
-    image = FileField('Выберите аватар')
+    sex = RadioField('Пол', choices=[(1, 'Мужской'), (2, 'Женский')], validators=[DataRequired()])
+    nickname = StringField('Имя пользователя', validators=[DataRequired()])
+    image = FileField('Выбрать аватар')
     submit = SubmitField('Зарегистрироваться')
 
 
 class LoginForm(FlaskForm):
-    email = EmailField('Почта', validators=[DataRequired()])
+    email = EmailField('Адрес электронной почты', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     remember_me = BooleanField('Запомнить меня')
     submit = SubmitField('Войти')
