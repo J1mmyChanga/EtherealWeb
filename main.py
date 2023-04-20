@@ -134,7 +134,8 @@ def register():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
-        return redirect('/login')
+        login_user(user)
+        return redirect("/")
     return render_template('register.html', title='Регистрация', form=form)
 
 
@@ -161,11 +162,7 @@ def edit_profile():
     else:
         form.nickname.data = user.nickname
         form.email.data = user.email
-        if user.image:
-            path_to_img = convert_to_image(user.image)
-        else:
-            path_to_img = ''
-    return render_template('edit_profile.html', title='Личные данные', form=form, img=path_to_img)
+    return render_template('edit_profile.html', title='Личные данные', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -179,6 +176,7 @@ def login():
             return redirect("/")
         return render_template('login.html',
                                message="Неправильный логин или пароль",
+                               title='Авторизация',
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
