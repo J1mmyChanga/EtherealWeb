@@ -1,3 +1,4 @@
+from data import db_session
 from data.clothes import Clothes
 from data.looks import Looks
 from data.season import Season
@@ -6,6 +7,9 @@ from data.style import Style
 from data.type import Type
 from data.users import Users
 
+
+db_session.global_init('db/ethereal.db')
+session = db_session.create_session()
 s1 = Sex(sex='Мужской')
 session.add(s1)
 s2 = Sex(sex='Женский')
@@ -210,3 +214,4 @@ l27.clothes.append(session.get(Clothes, 29))
 l28.clothes.append(session.get(Clothes, 33))
 l28.clothes.append(session.get(Clothes, 21))
 l28.clothes.append(session.get(Clothes, 36))
+session.commit()
