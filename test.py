@@ -6,6 +6,9 @@ from data.style import Style
 from data.type import Type
 from data.users import Users
 
+
+db_session.global_init('db/ethereal.db')
+session = db_session.create_session()
 s1 = Sex(sex='Мужской')
 session.add(s1)
 s2 = Sex(sex='Женский')
