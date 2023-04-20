@@ -1,4 +1,3 @@
-from data import db_session
 from data.clothes import Clothes
 from data.looks import Looks
 from data.season import Season
@@ -214,4 +213,3 @@ l27.clothes.append(session.get(Clothes, 29))
 l28.clothes.append(session.get(Clothes, 33))
 l28.clothes.append(session.get(Clothes, 21))
 l28.clothes.append(session.get(Clothes, 36))
-session.commit()
