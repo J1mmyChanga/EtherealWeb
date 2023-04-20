@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>
+<h1 class="text-center">Мои образы</h1>
+</p>
+<div class="casual">
+  <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#casual" aria-expanded="false" aria-controls="casual">
+    Свободный стиль
+  </a>
+  </p>
+  <div class="collapse show multi-collapse" id="casual">
+    <div class="card card-body">
+      <div class="card-container" style="display: flex; flex-wrap: wrap;">
+      {% for item in casual%}
+          <div class="card mb-5 w-100">
+            <div class="card-header text-center" style="font-weight: bold; font-size: 18px; width: 100%;">Образ №{{item.id}}</div>
+            <div class="card-body">
+            <div class="card-container" style="display: flex; flex-wrap: wrap;">
+            {% for clothes in item.clothes%}
+                <div class="card" style="width: 389px; margin: 10px; overflow: hidden;">
+                  <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{clothes.name}}</div>
+                  <img src="{{path}}/{{clothes.image}}" style="height: 350px; width: 400px; max-width: 100%;" class="mx-auto mt-4">
+                  <div class="card-body">
+                      <div class="collapse" id="item_{{item.id}}">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Тип: {{clothes.types.type}}</li>
+                            <li class="list-group-item">Сезон: {{clothes.seasons.season}}</li>
+                        </ul>
+                      </div>
+                  </div>
+                </div>
+            {% endfor %}
+              <div class="col">
+                <div class="card card-body mx-2">
+                  <div class="collapse" id="item_{{item.id}}">
+                      Описание:
+                      <p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Стиль: {{item.styles.style}}</li>
+                      <li class="list-group-item">Сезон: {{item.seasons.look_season}}</li>
+                      <li class="list-group-item">Характеристика: {{item.sex_.sex}}</li>
+                  </ul>
+                  <div class="collapse" id="item_{{item.id}}">
+                    <br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2 mt-3" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+            </div>
+            </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="business">
+  <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#business" aria-expanded="false" aria-controls="business">
+    Деловой стиль
+  </a>
+  </p>
+  <div class="collapse show multi-collapse" id="business">
+    <div class="card card-body">
+      <div class="card-container" style="display: flex; flex-wrap: wrap;">
+      {% for item in business%}
+          <div class="card mb-5 w-100">
+            <div class="card-header text-center" style="font-weight: bold; font-size: 18px; width: 100%;">Образ №{{item.id}}</div>
+            <div class="card-body">
+            <div class="card-container" style="display: flex; flex-wrap: wrap;">
+            {% for clothes in item.clothes%}
+                <div class="card" style="width: 389px; margin: 10px; overflow: hidden;">
+                  <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{clothes.name}}</div>
+                  <img src="{{path}}/{{clothes.image}}" style="height: 350px; width: 400px; max-width: 100%;" class="mx-auto mt-4">
+                  <div class="card-body">
+                      <div class="collapse" id="item_{{item.id}}">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Тип: {{clothes.types.type}}</li>
+                            <li class="list-group-item">Сезон: {{clothes.seasons.season}}</li>
+                        </ul>
+                      </div>
+                  </div>
+                </div>
+            {% endfor %}
+              <div class="col">
+                <div class="card card-body mx-2">
+                  <div class="collapse" id="item_{{item.id}}">
+                      Описание:
+                      <p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Стиль: {{item.styles.style}}</li>
+                      <li class="list-group-item">Сезон: {{item.seasons.look_season}}</li>
+                  </ul>
+                  <div class="collapse" id="item_{{item.id}}">
+                    <br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2 mt-3" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+            </div>
+            </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="sportswear">
+  <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#sportswear" aria-expanded="false" aria-controls="sportswear">
+    Спортивный стиль
+  </a>
+  </p>
+  <div class="collapse show multi-collapse" id="sportswear">
+    <div class="card card-body">
+      <div class="card-container" style="display: flex; flex-wrap: wrap;">
+      {% for item in sportswear%}
+          <div class="card mb-5 w-100">
+            <div class="card-header text-center" style="font-weight: bold; font-size: 18px; width: 100%;">Образ №{{item.id}}</div>
+            <div class="card-body">
+            <div class="card-container" style="display: flex; flex-wrap: wrap;">
+            {% for clothes in item.clothes%}
+                <div class="card" style="width: 389px; margin: 10px; overflow: hidden;">
+                  <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{clothes.name}}</div>
+                  <img src="{{path}}/{{clothes.image}}" style="height: 350px; width: 400px; max-width: 100%;" class="mx-auto mt-4">
+                  <div class="card-body">
+                      <div class="collapse" id="item_{{item.id}}">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Тип: {{clothes.types.type}}</li>
+                            <li class="list-group-item">Сезон: {{clothes.seasons.season}}</li>
+                        </ul>
+                      </div>
+                  </div>
+                </div>
+            {% endfor %}
+              <div class="col">
+                <div class="card card-body mx-2">
+                  <div class="collapse" id="item_{{item.id}}">
+                      Описание:
+                      <p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Стиль: {{item.styles.style}}</li>
+                      <li class="list-group-item">Сезон: {{item.seasons.look_season}}</li>
+                  </ul>
+                  <div class="collapse" id="item_{{item.id}}">
+                    <br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2 mt-3" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+            </div>
+            </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

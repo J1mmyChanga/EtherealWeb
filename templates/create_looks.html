@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>
+<h1 style="text-align: center;">Создание образа</h1>
+</p>
+<div class="my_style">
+    </p>
+    <div class="collapse show multi-collapse w-100" id="my_style">
+        <div class="card mb-5 w-100">
+            <div class="card-header text-start" style="font-weight: bold; font-size: 18px; width: 100%;">
+                <span class="badge align-items-center px-2 pe-3 pt-2 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill fs-6">
+                    <img class="me-2 rounded-circle me-1" width="24" height="24" src="/static/img/avatars/image{{ current_user.id }}.png" alt="">{{current_user.nickname}}
+                </span>
+            </div>
+            <div class="card-body">
+            <div class="card-container" style="display: flex; flex-wrap: wrap;">
+            {% for clothes in custom_look.clothes %}
+                <div class="card" style="width: 389px; margin: 10px; overflow: hidden;">
+                <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{clothes.name}}</div>
+                <img src="{{path}}/{{clothes.image}}" style="height: 350px; width: 400px; max-width: 100%;" class="mx-auto mt-4">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Тип: {{clothes.types.type}}</li>
+                        <li class="list-group-item">Сезон: {{clothes.seasons.season}}</li>
+                    </ul>
+                </div>
+                <div class="card-footer text-end">
+                    <a class="btn-close mt-2" type="button" href="/delete_clothes_in_looks/{{ custom_look.id }}/{{ clothes.id }}"></a>
+                </div>
+                </div>
+            {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="outer">
+    <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#outer" aria-expanded="false" aria-controls="outer">
+        Верхняя одежда
+    </a>
+    </p>
+    <div class="collapse" id="outer">
+    <div class="card card-body">
+        <div class="card-container" style="display: flex; flex-wrap: wrap;">
+        {% for item in outer%}
+            <div class="card" style="width: 400px; margin: 10px; overflow: hidden;">
+            <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{item.name}}</div>
+            <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px;" class="mx-auto mt-4">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Тип: {{item.types.type}}</li>
+                    <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
+                </ul>
+            </div>
+            <div class="card-footer text-end">
+              <a class="btn btn-outline-warning p-1 px-2" href="/add_clothes_to_looks/{{ custom_look.id }}/{{ item.id }}" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#e1b409" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                </svg>
+              </a>
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    </div>
+</div>
+<br>
+<div class="top">
+    <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#top" aria-expanded="false" aria-controls="top">
+        Верхняя лёгкая одежда
+    </a>
+    </p>
+    <div class="collapse" id="top">
+    <div class="card card-body">
+        <div class="card-container" style="display: flex; flex-wrap: wrap;">
+        {% for item in top%}
+            <div class="card" style="width: 400px; margin: 10px; overflow: hidden;">
+            <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{item.name}}</div>
+            <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px;" class="mx-auto mt-4">
+            <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Тип: {{item.types.type}}</li>
+                        <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
+                    </ul>
+            </div>
+            <div class="card-footer text-end">
+              <a class="btn btn-outline-warning p-1 px-2" href="/add_clothes_to_looks/{{ custom_look.id }}/{{ item.id }}" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#e1b409" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                </svg>
+              </a>
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    </div>
+</div>
+<br>
+<div class="lower">
+    <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#lower" aria-expanded="false" aria-controls="lower">
+        Поясная одежда
+    </a>
+    </p>
+    <div class="collapse" id="lower">
+    <div class="card card-body">
+        <div class="card-container" style="display: flex; flex-wrap: wrap;">
+        {% for item in lower%}
+            <div class="card" style="width: 400px; margin: 10px; overflow: hidden;">
+            <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{item.name}}</div>
+            <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px;" class="mx-auto mt-4">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Тип: {{item.types.type}}</li>
+                    <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
+                </ul>
+            </div>
+            <div class="card-footer text-end">
+              <a class="btn btn-outline-warning p-1 px-2" href="/add_clothes_to_looks/{{ custom_look.id }}/{{ item.id }}" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#e1b409" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                </svg>
+              </a>
+            </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    </div>
+</div>
+<form action="" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                {{ form.style.label }} {{ form.style(class="no-bullet") }}<br>
+                {% for error in form.style.errors %}
+                    <p class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.season.label }} {{ form.season(class="no-bullet") }}<br>
+                {% for error in form.season.errors %}
+                    <p class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.sex.label }} {{ form.sex(class="no-bullet") }}<br>
+                {% for error in form.sex.errors %}
+                    <p class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.description.label }}<br>{{ form.description }}<br>
+                {% for error in form.description.errors %}
+                    <p class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </p>
+            {% if message %}
+                <div class="alert alert-warning p-2" role="alert">
+                    {{message}}
+                </div>
+            {% endif %}
+            <p>
+                <button type="submit" name="find_clothes" class="btn btn-primary">Создать образ</button>
+            </p>
+        </div>
+    </div>
+</form>
+{% endblock %}

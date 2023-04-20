@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>
+<h1 class="text-center">Лента образов</h1>
+</p>
+<div class="custom_looks">
+  <a class="btn btn-outline-warning" href="/create_looks" role="button">Предложить образ
+      <button type="button" class="btn p-0 ms-1" style="background-color: transparent;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#e1b409" class="bi bi-clipboard-plus-fill" viewBox="0 0 16 16">
+          <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"></path>
+          <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm4.5 6V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5a.5.5 0 0 1 1 0Z"></path>
+        </svg>
+      </button>
+  </a>
+  </p>
+  <div class="card">
+  <div class="card-body">
+    <div class="card-container" style="display: flex; flex-wrap: wrap;">
+    {% for item in custom_looks%}
+        <div class="card mb-5 w-100">
+          <div class="card-header text-start" style="font-weight: bold; font-size: 18px; width: 100%;">
+              <span class="badge align-items-center px-2 pe-3 pt-2 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill fs-6">
+                <img class="me-2 rounded-circle me-1" width="24" height="24" src="/static/img/avatars/image{{ item.users.id }}.png" alt="">{{item.users.nickname}}
+              </span>
+          </div>
+          <div class="card-body">
+          <div class="card-container" style="display: flex; flex-wrap: wrap;">
+          {% for clothes in item.clothes%}
+              <div class="card" style="width: 389px; margin: 10px; overflow: hidden;">
+                <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{clothes.name}}</div>
+                <img src="{{path}}/{{clothes.image}}" style="height: 350px; width: 400px; max-width: 100%;" class="mx-auto mt-4">
+                <div class="card-body">
+                    <div class="collapse" id="item_{{item.id}}">
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Тип: {{clothes.types.type}}</li>
+                          <li class="list-group-item">Сезон: {{clothes.seasons.season}}</li>
+                      </ul>
+                    </div>
+                </div>
+              </div>
+          {% endfor %}
+            <div class="col">
+              <div class="card card-body mx-2">
+                <div class="collapse" id="item_{{item.id}}">
+                    Описание:
+                    <p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Стиль: {{item.styles.style}}</li>
+                    <li class="list-group-item">Сезон: {{item.seasons.look_season}}</li>
+                    <li class="list-group-item">Характеристика: {{item.sex_.sex}}</li>
+                </ul>
+                <div class="collapse" id="item_{{item.id}}">
+                  <br>
+                  {{ item.description }}
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+                {% if current_user.is_authenticated and current_user.id == item.user %}
+                  <a class="btn-close mt-2" type="button" href="/clothes_delete/{{ item.id }}"></a>
+                {% endif %}
+            </div>
+          </div>
+    {% endfor %}
+    </div>
+  </div>
+  </div>
+</div>
+{% endblock %}
