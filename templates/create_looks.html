@@ -5,15 +5,9 @@
 <h1 style="text-align: center;">Создание образа</h1>
 </p>
 <div class="my_style">
-    <a class="btn btn-secondary rounded-pill btn-sm">
-      Мой образ
-      <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#my_style" aria-expanded="false" aria-controls="my_style"></button>
-    </a>
     </p>
-    <div class="collapse show multi-collapse" id="my_style">
-      <div class="card card-body">
-        <div class="card-container" style="display: flex; flex-wrap: wrap;">
-        <div class="card mb-5">
+    <div class="collapse show multi-collapse w-100" id="my_style">
+        <div class="card mb-5 w-100">
             <div class="card-header text-center" style="font-weight: bold; font-size: 18px; width: 100%;">Образ от {{ custom_look.users.nickname }}</div>
             <div class="card-body">
             <div class="card-container" style="display: flex; flex-wrap: wrap;">
@@ -22,40 +16,19 @@
                 <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{clothes.name}}</div>
                 <img src="{{path}}/{{clothes.image}}" style="height: 350px; width: 400px; max-width: 100%;" class="mx-auto mt-4">
                 <div class="card-body">
-                    <a class="btn-close m-2 mt-1" type="button" href="/delete_clothes_in_looks/{{ custom_look.id }}/{{ clothes.id }}"></a>
-                    <div class="collapse" id="item_{{custom_look.id}}">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Тип: {{clothes.types.type}}</li>
-                            <li class="list-group-item">Сезон: {{clothes.seasons.season}}</li>
-                        </ul>
-                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Тип: {{clothes.types.type}}</li>
+                        <li class="list-group-item">Сезон: {{clothes.seasons.season}}</li>
+                    </ul>
+                </div>
+                <div class="card-footer text-end">
+                    <a class="btn-close mt-2" type="button" href="/delete_clothes_in_looks/{{ custom_look.id }}/{{ clothes.id }}"></a>
                 </div>
                 </div>
             {% endfor %}
-            <div class="col">
-                <div class="card card-body mx-2">
-                <div class="collapse" id="item_{{custom_look.id}}">
-                    Описание:
-                    <p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Стиль: {{custom_look.styles.style}}</li>
-                    <li class="list-group-item">Сезон: {{custom_look.seasons.look_season}}</li>
-                </ul>
-                <div class="collapse" id="item_{{custom_look.id}}">
-                    <br>
-                    {{ custom_look.description }}
-                </div>
-                </div>
-                <div class="card-body text-end">
-                <button class="btn btn-primary dropdown-toggle position-relative bottom-0 end-0" data-bs-toggle="collapse" data-bs-target="#item_{{custom_look.id}}" aria-expanded="false" aria-controls="item_{{custom_look.id}}">Подробнее</button>
-                </div>
-            </div>
-            </div>
             </div>
             </div>
         </div>
-      </div>
     </div>
 </div>
 <br>

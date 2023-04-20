@@ -11,7 +11,7 @@
     <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#outer" aria-expanded="false" aria-controls="outer"></button>
   </a>
   </p>
-  <div class="collapse" id="outer">
+  <div class="collapse show multi-collapse" id="outer">
     <div class="card card-body">
       <div class="card-container" style="display: flex; flex-wrap: wrap;">
         {% for item in outer%}
@@ -26,7 +26,7 @@
                   </ul>
                   <a class="btn-close m-2 mt-1" type="button" href="/clothes_delete/{{ item.id }}"></a>
                 </div>
-                <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+                <button class="btn btn-outline-warning dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
             </div>
           </div>
         {% endfor %}
@@ -41,7 +41,7 @@
     <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#top" aria-expanded="false" aria-controls="top"></button>
   </a>
   </p>
-  <div class="collapse" id="top">
+  <div class="collapse show multi-collapse" id="top">
     <div class="card card-body">
       <div class="card-container" style="display: flex; flex-wrap: wrap;">
         {% for item in top%}
@@ -56,7 +56,7 @@
                   </ul>
                   <a class="btn-close m-2 mt-1" type="button" href="/clothes_delete/{{ item.id }}"></a>
                 </div>
-                <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+                <button class="btn btn-outline-warning dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
             </div>
           </div>
         {% endfor %}
@@ -71,7 +71,7 @@
     <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#lower" aria-expanded="false" aria-controls="lower"></button>
   </a>
   </p>
-  <div class="collapse" id="lower">
+  <div class="collapse show multi-collapse" id="lower">
     <div class="card card-body">
       <div class="card-container" style="display: flex; flex-wrap: wrap;">
         {% for item in lower%}
@@ -86,7 +86,7 @@
                   </ul>
                   <a class="btn-close m-2 mt-1" type="button" href="/clothes_delete/{{ item.id }}"></a>
                 </div>
-                <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+                <button class="btn btn-outline-warning dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
             </div>
           </div>
         {% endfor %}
