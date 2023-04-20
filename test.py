@@ -1,3 +1,4 @@
+from data import db_session
 from data.clothes import Clothes
 from data.looks import Looks
 from data.season import Season
@@ -5,6 +6,8 @@ from data.sex import Sex
 from data.style import Style
 from data.type import Type
 from data.users import Users
+
+session = db_session.create_session()
 
 s1 = Sex(sex='Мужской')
 session.add(s1)
