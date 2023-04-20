@@ -8,7 +8,11 @@
     </p>
     <div class="collapse show multi-collapse w-100" id="my_style">
         <div class="card mb-5 w-100">
-            <div class="card-header text-center" style="font-weight: bold; font-size: 18px; width: 100%;">Образ от {{ custom_look.users.nickname }}</div>
+            <div class="card-header text-start" style="font-weight: bold; font-size: 18px; width: 100%;">
+                <span class="badge align-items-center px-2 pe-3 pt-2 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill fs-6">
+                    <img class="me-2 rounded-circle me-1" width="24" height="24" src="/static/img/avatars/image{{ current_user.id }}.png" alt="">{{current_user.nickname}}
+                </span>
+            </div>
             <div class="card-body">
             <div class="card-container" style="display: flex; flex-wrap: wrap;">
             {% for clothes in custom_look.clothes %}
@@ -33,9 +37,8 @@
 </div>
 <br>
 <div class="outer">
-    <a class="btn btn-secondary rounded-pill btn-sm">
-    Верхняя
-    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#outer" aria-expanded="false" aria-controls="outer"></button>
+    <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#outer" aria-expanded="false" aria-controls="outer">
+        Верхняя одежда
     </a>
     </p>
     <div class="collapse" id="outer">
@@ -46,18 +49,17 @@
             <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{item.name}}</div>
             <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px;" class="mx-auto mt-4">
             <div class="card-body">
-                <div class="collapse" id="item_{{item.id}}">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Тип: {{item.types.type}}</li>
-                        <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
-                    </ul>
-                    <a type="button" class="btn btn-secondary" href="/add_clothes_to_looks/{{ custom_look.id }}/{{ item.id }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
-                        </svg>
-                    </a>
-                </div>
-                <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Тип: {{item.types.type}}</li>
+                    <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
+                </ul>
+            </div>
+            <div class="card-footer text-end">
+              <a class="btn btn-outline-warning p-1 px-2" href="/add_clothes_to_looks/{{ custom_look.id }}/{{ item.id }}" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#e1b409" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                </svg>
+              </a>
             </div>
             </div>
         {% endfor %}
@@ -67,9 +69,8 @@
 </div>
 <br>
 <div class="top">
-    <a class="btn btn-secondary rounded-pill btn-sm">
-    Верхняя лёгкая
-    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#top" aria-expanded="false" aria-controls="top"></button>
+    <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#top" aria-expanded="false" aria-controls="top">
+        Верхняя лёгкая одежда
     </a>
     </p>
     <div class="collapse" id="top">
@@ -80,18 +81,17 @@
             <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{item.name}}</div>
             <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px;" class="mx-auto mt-4">
             <div class="card-body">
-                <div class="collapse" id="item_{{item.id}}">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Тип: {{item.types.type}}</li>
                         <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
                     </ul>
-                    <a type="button" class="btn btn-secondary" href="/add_clothes_to_looks/{{ custom_look.id }}/{{ item.id }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
-                        </svg>
-                    </a>
-                </div>
-                <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+            </div>
+            <div class="card-footer text-end">
+              <a class="btn btn-outline-warning p-1 px-2" href="/add_clothes_to_looks/{{ custom_look.id }}/{{ item.id }}" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#e1b409" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                </svg>
+              </a>
             </div>
             </div>
         {% endfor %}
@@ -101,9 +101,8 @@
 </div>
 <br>
 <div class="lower">
-    <a class="btn btn-secondary rounded-pill btn-sm">
-    Поясная
-    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#lower" aria-expanded="false" aria-controls="lower"></button>
+    <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#lower" aria-expanded="false" aria-controls="lower">
+        Поясная одежда
     </a>
     </p>
     <div class="collapse" id="lower">
@@ -114,18 +113,17 @@
             <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{item.name}}</div>
             <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px;" class="mx-auto mt-4">
             <div class="card-body">
-                <div class="collapse" id="item_{{item.id}}">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Тип: {{item.types.type}}</li>
-                        <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
-                    </ul>
-                    <a type="button" class="btn btn-secondary" href="/add_clothes_to_looks/{{ custom_look.id }}/{{ item.id }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
-                        </svg>
-                    </a>
-                </div>
-                <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Тип: {{item.types.type}}</li>
+                    <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
+                </ul>
+            </div>
+            <div class="card-footer text-end">
+              <a class="btn btn-outline-warning p-1 px-2" href="/add_clothes_to_looks/{{ custom_look.id }}/{{ item.id }}" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#e1b409" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                </svg>
+              </a>
             </div>
             </div>
         {% endfor %}

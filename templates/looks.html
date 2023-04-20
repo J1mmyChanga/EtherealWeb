@@ -5,9 +5,8 @@
 <h1 class="text-center">Мои образы</h1>
 </p>
 <div class="casual">
-  <a class="btn btn-secondary rounded-pill btn-sm">
+  <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#casual" aria-expanded="false" aria-controls="casual">
     Свободный стиль
-    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#casual" aria-expanded="false" aria-controls="casual"></button>
   </a>
   </p>
   <div class="collapse show multi-collapse" id="casual">
@@ -41,17 +40,18 @@
                   <ul class="list-group list-group-flush">
                       <li class="list-group-item">Стиль: {{item.styles.style}}</li>
                       <li class="list-group-item">Сезон: {{item.seasons.look_season}}</li>
+                      <li class="list-group-item">Характеристика: {{item.sex_.sex}}</li>
                   </ul>
                   <div class="collapse" id="item_{{item.id}}">
                     <br>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
                   </div>
                 </div>
-                <div class="card-body text-end">
-                  <button class="btn btn-outline-warning dropdown-toggle position-relative bottom-0 end-0" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
-                </div>
               </div>
             </div>
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2 mt-3" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
             </div>
             </div>
       {% endfor %}
@@ -61,9 +61,8 @@
 </div>
 <br>
 <div class="business">
-  <a class="btn btn-secondary rounded-pill btn-sm">
+  <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#business" aria-expanded="false" aria-controls="business">
     Деловой стиль
-    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#business" aria-expanded="false" aria-controls="business"></button>
   </a>
   </p>
   <div class="collapse show multi-collapse" id="business">
@@ -103,11 +102,11 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
                   </div>
                 </div>
-                <div class="card-body text-end">
-                  <button class="btn btn-outline-warning dropdown-toggle position-relative bottom-0 end-0" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
-                </div>
               </div>
             </div>
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2 mt-3" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
             </div>
             </div>
       {% endfor %}
@@ -117,9 +116,8 @@
 </div>
 <br>
 <div class="sportswear">
-  <a class="btn btn-secondary rounded-pill btn-sm">
+  <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#sportswear" aria-expanded="false" aria-controls="sportswear">
     Спортивный стиль
-    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#sportswear" aria-expanded="false" aria-controls="sportswear"></button>
   </a>
   </p>
   <div class="collapse show multi-collapse" id="sportswear">
@@ -159,11 +157,11 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
                   </div>
                 </div>
-                <div class="card-body text-end">
-                  <button class="btn btn-outline-warning dropdown-toggle position-relative bottom-0 end-0" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
-                </div>
               </div>
             </div>
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2 mt-3" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
             </div>
             </div>
       {% endfor %}

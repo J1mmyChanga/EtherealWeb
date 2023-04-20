@@ -4,17 +4,22 @@
 <p>
 <h1 class="text-center">Мой гардероб</h1>
 </p>
-<a class="btn btn-secondary position-absolute" href="/add_clothes" role="button" style="top: 200px; left: 50px;">Добавить одежду</a>
 <div class="outer">
-  <a class="btn btn-secondary rounded-pill btn-sm">
-    Верхняя
-    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#outer" aria-expanded="false" aria-controls="outer"></button>
+  <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#outer" aria-expanded="false" aria-controls="outer">
+    Верхняя одежда
+  </a>
+  <a class="btn btn-outline-warning" href="/add_clothes" role="button">Добавить одежду
+      <button type="button" class="btn p-0 ms-1" style="background-color: transparent;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#e1b409" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z"></path>
+        </svg>
+      </button>
   </a>
   </p>
   <div class="collapse show multi-collapse" id="outer">
     <div class="card card-body">
-      <div class="card-container" style="display: flex; flex-wrap: wrap;">
-        {% for item in outer%}
+      <div class="card-container" style="display: flex; flex-wrap: wrap;" >
+        {% for item in outer %}
           <div class="card" style="width: 400px; margin: 10px; overflow: hidden;">
             <div class="card-header text-center" style="font-weight: bold; font-size: 18px;">{{item.name}}</div>
             <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px;" class="mx-auto mt-4">
@@ -24,9 +29,11 @@
                       <li class="list-group-item">Тип: {{item.types.type}}</li>
                       <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
                   </ul>
-                  <a class="btn-close m-2 mt-1" type="button" href="/clothes_delete/{{ item.id }}"></a>
                 </div>
-                <button class="btn btn-outline-warning dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+                <a class="btn-close mt-2" type="button" href="/clothes_delete/{{ item.id }}"></a>
             </div>
           </div>
         {% endfor %}
@@ -36,9 +43,8 @@
 </div>
 <br>
 <div class="top">
-  <a class="btn btn-secondary rounded-pill btn-sm">
-    Верхняя лёгкая
-    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#top" aria-expanded="false" aria-controls="top"></button>
+  <a class="btn btn-outline-warning rounded-pill dropdown-toggle  mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#top" aria-expanded="false" aria-controls="top">
+    Верхняя лёгкая одежда
   </a>
   </p>
   <div class="collapse show multi-collapse" id="top">
@@ -54,9 +60,11 @@
                       <li class="list-group-item">Тип: {{item.types.type}}</li>
                       <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
                   </ul>
-                  <a class="btn-close m-2 mt-1" type="button" href="/clothes_delete/{{ item.id }}"></a>
                 </div>
-                <button class="btn btn-outline-warning dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+                <a class="btn-close mt-2" type="button" href="/clothes_delete/{{ item.id }}"></a>
             </div>
           </div>
         {% endfor %}
@@ -66,9 +74,8 @@
 </div>
 <br>
 <div class="lower">
-  <a class="btn btn-secondary rounded-pill btn-sm">
-    Поясная
-    <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#lower" aria-expanded="false" aria-controls="lower"></button>
+  <a class="btn btn-outline-warning rounded-pill dropdown-toggle  mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#lower" aria-expanded="false" aria-controls="lower">
+    Поясная одежда
   </a>
   </p>
   <div class="collapse show multi-collapse" id="lower">
@@ -84,9 +91,11 @@
                       <li class="list-group-item">Тип: {{item.types.type}}</li>
                       <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
                   </ul>
-                  <a class="btn-close m-2 mt-1" type="button" href="/clothes_delete/{{ item.id }}"></a>
                 </div>
-                <button class="btn btn-outline-warning dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
+                <a class="btn-close mt-2" type="button" href="/clothes_delete/{{ item.id }}"></a>
             </div>
           </div>
         {% endfor %}

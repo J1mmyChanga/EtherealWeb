@@ -35,13 +35,6 @@ api.add_resource(LoginResource, "/api/login/")
 api.add_resource(WardrobeResource, "/api/wardrobe/")
 
 
-@app.route('/')
-def index():
-    param = {}
-    param['title'] = 'Главная'
-    return render_template("index.html", **param)
-
-
 @app.route('/wardrobe')
 @login_required
 def wardrobe():
@@ -131,21 +124,15 @@ def looks():
     return render_template("looks.html", **param)
 
 
+@app.route('/')
 @app.route('/looks_feed')
 def looks_feed():
     param = {}
-    param['casual'] = []
-    param['business'] = []
-    param['sportswear'] = []
     session = db_session.create_session()
-    custom_looks = session.query(CustomLooks).all()
-    for item in custom_looks:
-        if item.style == 1:
-            param['business'].append(item)
-        elif item.style == 2:
-            param['casual'].append(item)
-        elif item.style == 3:
-            param['sportswear'].append(item)
+    param['custom_looks'] = []
+    for item in session.query(CustomLooks).all():
+        if item.style:
+            param['custom_looks'].append(item)
     param['title'] = 'Лента образов'
     param['path'] = url_for('static', filename='img/clothes_def')
     return render_template("looks_feed.html", **param)
