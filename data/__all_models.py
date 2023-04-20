@@ -6,3 +6,4 @@ from . import users
 from . import clothes
 from . import looks
 from . import association_tables
+from . import custom_looks

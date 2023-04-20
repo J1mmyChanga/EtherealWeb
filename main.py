@@ -2,7 +2,7 @@ import io
 
 from PIL import Image
 from flask_restful import Api
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, abort, session, make_response
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 
 from data import db_session
@@ -13,9 +13,12 @@ from data.sex import Sex
 from data.style import Style
 from data.type import Type
 from data.users import Users
+from data.custom_looks import CustomLooks
 
 from forms.user import RegisterForm, LoginForm, EditForm
 from forms.clothes import ClothesForm
+from forms.custom_looks import CustomLooksForm
+
 from resources import LoginResource
 
 app = Flask(__name__)
@@ -78,6 +81,20 @@ def add_clothes():
     return render_template('add_clothes.html', **param)
 
 
+@app.route('/clothes_delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def clothes_delete(id):
+    session = db_session.create_session()
+    clothes = session.get(Clothes, id)
+    user_clothes = session.get(Users, current_user.id)
+    if clothes:
+        user_clothes.clothes.remove(clothes)
+        session.commit()
+    else:
+        abort(404)
+    return redirect('/wardrobe')
+
+
 @app.route('/looks')
 @login_required
 def looks():
@@ -108,6 +125,113 @@ def looks():
     param['title'] = 'Мои образы'
     param['path'] = url_for('static', filename='img/clothes_def')
     return render_template("looks.html", **param)
+
+
+@app.route('/looks_feed')
+def looks_feed():
+    param = {}
+    param['casual'] = []
+    param['business'] = []
+    param['sportswear'] = []
+    session = db_session.create_session()
+    custom_looks = session.query(CustomLooks).all()
+    for item in custom_looks:
+        if item.style == 1:
+            param['business'].append(item)
+        elif item.style == 2:
+            param['casual'].append(item)
+        elif item.style == 3:
+            param['sportswear'].append(item)
+    param['title'] = 'Лента образов'
+    param['path'] = url_for('static', filename='img/clothes_def')
+    return render_template("looks_feed.html", **param)
+
+
+@app.route('/create_looks', methods=['GET', 'POST'])
+@login_required
+def create_looks():
+    visits_count = session.get('visits_count', 0)
+    session['visits_count'] = visits_count + 1
+    session_ = db_session.create_session()
+    if visits_count == 0:
+        custom_look = CustomLooks(
+            user=current_user.id,
+            description=''
+        )
+    else:
+        custom_look = session_.query(CustomLooks).filter(CustomLooks.user == current_user.id).all()[-1]
+    form = CustomLooksForm()
+    param = {}
+    param['title'] = 'Создание образа'
+    param['form'] = form
+    param['custom_look'] = custom_look
+    param['outer'] = []
+    param['top'] = []
+    param['lower'] = []
+    all_clothes = session_.query(Clothes).all()
+    for item in all_clothes:
+        if item.type == 1:
+            param['outer'].append(item)
+        elif item.type == 2:
+            param['top'].append(item)
+        elif item.type == 3:
+            param['lower'].append(item)
+    param['path'] = url_for('static', filename='img/clothes_def')
+    session_.add(custom_look)
+    session_.commit()
+    if form.validate_on_submit():
+        if len(custom_look.clothes) < 2:
+            return render_template('create_looks.html', **param, message='В образе не хватает одежды')
+        session['visits_count'] = 0
+        custom_look.style = form.style.data
+        custom_look.season = form.season.data
+        custom_look.sex = form.sex.data
+        custom_look.description = form.description.data
+        session_.commit()
+        return redirect('/looks_feed')
+    return render_template('create_looks.html', **param)
+
+
+@app.route('/delete_looks/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_looks(id):
+    session = db_session.create_session()
+    custom_look = session.query(CustomLooks).filter(CustomLooks.id == id, CustomLooks.user == current_user.id).first()
+    if custom_look:
+        session.delete(custom_look)
+        session.commit()
+    else:
+        abort(404)
+    return redirect('/looks_feed')
+
+
+
+@app.route('/add_clothes_to_looks/<int:look_id>/<int:clothes_id>', methods=['GET', 'POST'])
+@login_required
+def add_clothes_to_looks(look_id, clothes_id):
+    session = db_session.create_session()
+    clothes = session.get(Clothes, clothes_id)
+    custom_look = session.get(CustomLooks, look_id)
+    if clothes:
+        custom_look.clothes.append(clothes)
+        session.commit()
+    else:
+        abort(404)
+    return redirect('/create_looks')
+
+
+@app.route('/delete_clothes_in_looks/<int:look_id>/<int:clothes_id>', methods=['GET', 'POST'])
+@login_required
+def delete_clothes_in_looks(look_id, clothes_id):
+    session = db_session.create_session()
+    clothes = session.get(Clothes, clothes_id)
+    custom_look = session.get(CustomLooks, look_id)
+    if clothes:
+        custom_look.clothes.remove(clothes)
+        session.commit()
+    else:
+        abort(404)
+    return redirect('/create_looks')
 
 
 @app.route('/register', methods=['GET', 'POST'])

@@ -19,3 +19,9 @@ association_table_3 = sqlalchemy.Table(
     SqlAlchemyBase.metadata,
     sqlalchemy.Column('look', sqlalchemy.Integer, sqlalchemy.ForeignKey('looks.id')),
     sqlalchemy.Column('clothes', sqlalchemy.Integer, sqlalchemy.ForeignKey('clothes.id')))
+
+association_table_4 = sqlalchemy.Table(
+    'custom_looks_to_clothes',
+    SqlAlchemyBase.metadata,
+    sqlalchemy.Column('custom_look', sqlalchemy.Integer, sqlalchemy.ForeignKey('custom_looks.id')),
+    sqlalchemy.Column('clothes', sqlalchemy.Integer, sqlalchemy.ForeignKey('clothes.id')))

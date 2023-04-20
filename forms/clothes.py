@@ -8,4 +8,3 @@ class ClothesForm(FlaskForm):
     season = RadioField('Сезон:', choices=[(1, 'Лето'), (2, 'Зима'), (3, 'Всесезонная'), (4, 'Демисезонная')], validators=[DataRequired()])
     find = SubmitField('Найти')
     add = SubmitField('Добавить')
-    

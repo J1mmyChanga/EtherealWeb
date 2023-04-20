@@ -4,7 +4,7 @@
 <p>
 <h1 class="text-center">Мой гардероб</h1>
 </p>
-<a class="btn btn-secondary position-absolute" href="/add_clothes" role="button" style="top: 200px; left: 100px;">Добавить одежду</a>
+<a class="btn btn-secondary position-absolute" href="/add_clothes" role="button" style="top: 200px; left: 50px;">Добавить одежду</a>
 <div class="outer">
   <a class="btn btn-secondary rounded-pill btn-sm">
     Верхняя
@@ -24,7 +24,7 @@
                       <li class="list-group-item">Тип: {{item.types.type}}</li>
                       <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
                   </ul>
-                  <button type="button" class="btn-close m-2 mt-1" aria-label="Закрыть"></button>
+                  <a class="btn-close m-2 mt-1" type="button" href="/clothes_delete/{{ item.id }}"></a>
                 </div>
                 <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
             </div>
@@ -54,7 +54,7 @@
                       <li class="list-group-item">Тип: {{item.types.type}}</li>
                       <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
                   </ul>
-                  <button type="button" class="btn-close m-2 mt-1" aria-label="Закрыть"></button>
+                  <a class="btn-close m-2 mt-1" type="button" href="/clothes_delete/{{ item.id }}"></a>
                 </div>
                 <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
             </div>
@@ -84,7 +84,7 @@
                       <li class="list-group-item">Тип: {{item.types.type}}</li>
                       <li class="list-group-item">Сезон: {{item.seasons.season}}</li>
                   </ul>
-                  <button type="button" class="btn-close m-2 mt-1" aria-label="Закрыть"></button>
+                  <a class="btn-close m-2 mt-1" type="button" href="/clothes_delete/{{ item.id }}"></a>
                 </div>
                 <button class="btn btn-light dropdown-toggle" style="width: 100%;" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}"></button>
             </div>
