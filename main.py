@@ -2,18 +2,13 @@ import io
 
 from PIL import Image
 from flask_restful import Api
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, abort, session
 from werkzeug.serving import WSGIRequestHandler
-from flask import Flask, render_template, redirect, url_for, request, abort, session, make_response
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 
 from data import db_session
 from data.clothes import Clothes
 from data.looks import Looks
-from data.season import Season
-from data.sex import Sex
-from data.style import Style
-from data.type import Type
 from data.users import Users
 from data.custom_looks import CustomLooks
 
@@ -236,6 +231,56 @@ def delete_clothes_in_looks(look_id, clothes_id):
     else:
         abort(404)
     return redirect('/create_looks')
+
+
+@app.route('/favourite')
+@login_required
+def favourite():
+    param = {}
+    param['title'] = 'Избранное'
+    param['casual'] = []
+    param['business'] = []
+    param['sportswear'] = []
+    param['path'] = url_for('static', filename='img/clothes_def')
+    session = db_session.create_session()
+    favourites = session.get(Users, current_user.id).looks
+    for item in favourites:
+        if item.style == 1:
+            param['business'].append(item)
+        elif item.style == 2:
+            param['casual'].append(item)
+        elif item.style == 3:
+            param['sportswear'].append(item)
+    return render_template('favourite.html', **param)
+    
+
+
+@app.route('/add_favourite/<int:id>', methods=['GET', 'POST'])
+@login_required
+def add_favourite(id):
+    session = db_session.create_session()
+    look = session.get(Looks, id)
+    favourites = session.get(Users, current_user.id)
+    if look:
+        favourites.looks.append(look)
+        session.commit()
+    else:
+        abort(404)
+    return redirect('/looks')
+
+
+@app.route('/delete_favourite/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_favourite(id):
+    session = db_session.create_session()
+    look = session.get(Looks, id)
+    favourites = session.get(Users, current_user.id)
+    if look:
+        favourites.looks.remove(look)
+        session.commit()
+    else:
+        abort(404)
+    return redirect('/favourite')
 
 
 @app.route('/register', methods=['GET', 'POST'])
