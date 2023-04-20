@@ -10,11 +10,11 @@
     <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#casual" aria-expanded="false" aria-controls="casual"></button>
   </a>
   </p>
-  <div class="collapse" id="casual">
+  <div class="collapse show multi-collapse" id="casual">
     <div class="card card-body">
       <div class="card-container" style="display: flex; flex-wrap: wrap;">
       {% for item in casual%}
-          <div class="card mb-5">
+          <div class="card mb-5 w-100">
             <div class="card-header text-center" style="font-weight: bold; font-size: 18px; width: 100%;">Образ №{{item.id}}</div>
             <div class="card-body">
             <div class="card-container" style="display: flex; flex-wrap: wrap;">
@@ -48,7 +48,7 @@
                   </div>
                 </div>
                 <div class="card-body text-end">
-                  <button class="btn btn-primary dropdown-toggle position-relative bottom-0 end-0" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+                  <button class="btn btn-outline-warning dropdown-toggle position-relative bottom-0 end-0" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
                 </div>
               </div>
             </div>
@@ -66,11 +66,11 @@
     <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#business" aria-expanded="false" aria-controls="business"></button>
   </a>
   </p>
-  <div class="collapse" id="business">
+  <div class="collapse show multi-collapse" id="business">
     <div class="card card-body">
       <div class="card-container" style="display: flex; flex-wrap: wrap;">
       {% for item in business%}
-          <div class="card mb-5">
+          <div class="card mb-5 w-100">
             <div class="card-header text-center" style="font-weight: bold; font-size: 18px; width: 100%;">Образ №{{item.id}}</div>
             <div class="card-body">
             <div class="card-container" style="display: flex; flex-wrap: wrap;">
@@ -104,7 +104,7 @@
                   </div>
                 </div>
                 <div class="card-body text-end">
-                  <button class="btn btn-primary dropdown-toggle position-relative bottom-0 end-0" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+                  <button class="btn btn-outline-warning dropdown-toggle position-relative bottom-0 end-0" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
                 </div>
               </div>
             </div>
@@ -122,11 +122,11 @@
     <button class="btn btn-light rounded-pill btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#sportswear" aria-expanded="false" aria-controls="sportswear"></button>
   </a>
   </p>
-  <div class="collapse" id="sportswear">
+  <div class="collapse show multi-collapse" id="sportswear">
     <div class="card card-body">
       <div class="card-container" style="display: flex; flex-wrap: wrap;">
       {% for item in sportswear%}
-          <div class="card mb-5">
+          <div class="card mb-5 w-100">
             <div class="card-header text-center" style="font-weight: bold; font-size: 18px; width: 100%;">Образ №{{item.id}}</div>
             <div class="card-body">
             <div class="card-container" style="display: flex; flex-wrap: wrap;">
@@ -160,7 +160,7 @@
                   </div>
                 </div>
                 <div class="card-body text-end">
-                  <button class="btn btn-primary dropdown-toggle position-relative bottom-0 end-0" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+                  <button class="btn btn-outline-warning dropdown-toggle position-relative bottom-0 end-0" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
                 </div>
               </div>
             </div>

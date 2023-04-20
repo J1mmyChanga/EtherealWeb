@@ -1,3 +1,4 @@
+from data import db_session
 from data.clothes import Clothes
 from data.looks import Looks
 from data.season import Season
