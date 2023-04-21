@@ -14,7 +14,7 @@ class Users(SqlAlchemyBase, UserMixin):
     nickname = sqlalchemy.Column(sqlalchemy.String)
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String)
-    image = sqlalchemy.Column(sqlalchemy.BLOB, nullable=True)
+    image = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     sex_ = orm.relationship("Sex", backref="users")
 

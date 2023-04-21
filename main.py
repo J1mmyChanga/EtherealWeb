@@ -128,6 +128,7 @@ def looks_feed():
     for item in session.query(CustomLooks).all():
         if item.style:
             param['custom_looks'].append(item)
+    param['custom_looks'] = param['custom_looks'][::-1]
     param['title'] = 'Лента образов'
     param['path'] = url_for('static', filename='img/clothes_def')
     return render_template("looks_feed.html", **param)
@@ -272,6 +273,7 @@ def delete_favourite(id):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    session['visits_count'] = 0
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
@@ -289,12 +291,13 @@ def register():
             sex=form.sex.data,
             nickname=form.nickname.data
         )
-        if form.image.data:
-            user.image = convert_to_binary(form.image.data)
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
         login_user(user)
+        if form.image.data:
+            user.image = convert_to_image(convert_to_binary(form.image.data))
+            db_sess.commit()
         return redirect("/")
     return render_template('register.html', title='Регистрация', form=form)
 
@@ -313,7 +316,7 @@ def edit_profile():
         if form.nickname.data:
             user.nickname = form.nickname.data
         if form.image.data:
-            user.image = convert_to_binary(form.image.data)
+            user.image = convert_to_image(convert_to_binary(form.image.data))
         if form.password.data:
             user.set_password(form.password.data)
 
@@ -359,6 +362,7 @@ def convert_to_image(bytes_array):
 @app.route('/logout')
 @login_required
 def logout():
+    session['visits_count'] = 0
     logout_user()
     return redirect("/")
 
