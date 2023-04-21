@@ -52,6 +52,11 @@
             </div>
             <div class="card-footer text-end">
                 <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2 mt-3" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+                <a class="btn btn-outline-warning p-1 px-2" href="/add_favourite/{{ item.id }}" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#e1b409" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                    </svg>
+                </a>
             </div>
             </div>
       {% endfor %}
@@ -96,6 +101,7 @@
                   <ul class="list-group list-group-flush">
                       <li class="list-group-item">Стиль: {{item.styles.style}}</li>
                       <li class="list-group-item">Сезон: {{item.seasons.look_season}}</li>
+                      <li class="list-group-item">Характеристика: {{item.sex_.sex}}</li>
                   </ul>
                   <div class="collapse" id="item_{{item.id}}">
                     <br>
@@ -107,6 +113,11 @@
             </div>
             <div class="card-footer text-end">
                 <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2 mt-3" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+                <a class="btn btn-outline-warning p-1 px-2" href="/add_favourite/{{ item.id }}" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#e1b409" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                    </svg>
+                </a>
             </div>
             </div>
       {% endfor %}
@@ -151,6 +162,7 @@
                   <ul class="list-group list-group-flush">
                       <li class="list-group-item">Стиль: {{item.styles.style}}</li>
                       <li class="list-group-item">Сезон: {{item.seasons.look_season}}</li>
+                      <li class="list-group-item">Характеристика: {{item.sex_.sex}}</li>
                   </ul>
                   <div class="collapse" id="item_{{item.id}}">
                     <br>
@@ -162,6 +174,11 @@
             </div>
             <div class="card-footer text-end">
                 <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2 mt-3" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+                <a class="btn btn-outline-warning p-1 px-2" href="/add_favourite/{{ item.id }}" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#e1b409" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                    </svg>
+                </a>
             </div>
             </div>
       {% endfor %}
