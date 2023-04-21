@@ -7,7 +7,7 @@
 <div class="my_style">
     </p>
     <div class="collapse show multi-collapse w-100" id="my_style">
-        <div class="card mb-5 w-100">
+        <div class="card mb-3 w-100">
             <div class="card-header text-start" style="font-weight: bold; font-size: 18px; width: 100%;">
                 <span class="badge align-items-center px-2 pe-3 pt-2 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill fs-6">
                     <img class="me-2 rounded-circle me-1" width="24" height="24" src="/static/img/avatars/image{{ current_user.id }}.png" alt="">{{current_user.nickname}}
@@ -100,7 +100,7 @@
     </div>
 </div>
 <br>
-<div class="lower">
+<div class="lower mb-4">
     <a class="btn btn-outline-warning rounded-pill dropdown-toggle mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#lower" aria-expanded="false" aria-controls="lower">
         Поясная одежда
     </a>
@@ -133,49 +133,56 @@
 </div>
 <form action="" method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
-    <div class="row">
+        <p>
         <div class="col-md-6">
-            <p>
-                {{ form.style.label }} {{ form.style(class="no-bullet") }}<br>
-                {% for error in form.style.errors %}
-                    <p class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </p>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.season.label }} {{ form.season(class="no-bullet") }}<br>
-                {% for error in form.season.errors %}
-                    <p class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </p>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.sex.label }} {{ form.sex(class="no-bullet") }}<br>
-                {% for error in form.sex.errors %}
-                    <p class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </p>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.description.label }}<br>{{ form.description }}<br>
-                {% for error in form.description.errors %}
-                    <p class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </p>
-                {% endfor %}
-            </p>
-            {% if message %}
-                <div class="alert alert-warning p-2" role="alert">
-                    {{message}}
-                </div>
-            {% endif %}
-            <p>
-                <button type="submit" name="find_clothes" class="btn btn-primary">Создать образ</button>
-            </p>
+        <fieldset class="mb-4 text-start">
+            <legend class="fs-5 text-secondary-emphasis">Стиль</legend>
+            {% for item in form.style %}
+              <div class="form-check">
+                {{item(type="radio", class="form-check-input", id="style_{{item.label}}")}}
+                {{item.label(class="form-check-label text-secondary-emphasis", for="style_{{item.label}}")}}
+              </div>
+            {% endfor %}
+        </fieldset>
+        </p>
+        <p>
+        <fieldset class="mb-4 text-start">
+            <legend class="fs-5 text-secondary-emphasis">Сезон</legend>
+            {% for item in form.season %}
+              <div class="form-check">
+                {{item(type="radio", class="form-check-input", id="season_{{item.label}}")}}
+                {{item.label(class="form-check-label text-secondary-emphasis", for="season_{{item.label}}")}}
+              </div>
+            {% endfor %}
+        </fieldset>
+        </p>
         </div>
-    </div>
+        <p>
+        <div class="col-md-6">
+        <fieldset class="mb-4 text-start">
+            <legend class="fs-5 text-secondary-emphasis">Характеристика</legend>
+            {% for item in form.sex %}
+              <div class="form-check">
+                {{item(type="radio", class="form-check-input", id="sex_{{item.label}}")}}
+                {{item.label(class="form-check-label text-secondary-emphasis", for="sex_{{item.label}}")}}
+              </div>
+            {% endfor %}
+        </fieldset>
+        </p>
+        <p>
+        <div class="input-group">
+            {{ form.description.label(class="input-group-text") }}
+            {{ form.description(class="form-control") }}
+        </div>
+        </p>
+        {% if message %}
+            <div class="alert alert-warning p-2" role="alert">
+                {{message}}
+            </div>
+        {% endif %}
+        <p>
+            <button type="submit" name="find_clothes" class="btn btn-outline-warning">Предложить образ</button>
+        </p>
+        </div>
 </form>
 {% endblock %}

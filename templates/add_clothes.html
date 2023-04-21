@@ -9,37 +9,46 @@
     <div class="row">
         <div class="col-md-6">
             <p>
-                {{ form.type.label }} {{ form.type(class="no-bullet") }}<br>
-                {% for error in form.type.errors %}
-                    <p class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </p>
+            <fieldset class="mb-4 text-start">
+                <legend class="fs-5 text-secondary-emphasis">Тип</legend>
+                {% for item in form.type %}
+                  <div class="form-check">
+                    {{item(type="radio", class="form-check-input", id="type_{{item.label}}")}}
+                    {{item.label(class="form-check-label text-secondary-emphasis", for="type_{{item.label}}")}}
+                  </div>
                 {% endfor %}
+            </fieldset>
             </p>
             <p>
-                {{ form.season.label }} {{ form.season(class="no-bullet") }}<br>
-                {% for error in form.season.errors %}
-                    <p class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </p>
+            <fieldset class="mb-4 text-start">
+                <legend class="fs-5 text-secondary-emphasis">Сезон</legend>
+                {% for item in form.season %}
+                  <div class="form-check">
+                    {{item(type="radio", class="form-check-input", id="season_{{item.label}}")}}
+                    {{item.label(class="form-check-label text-secondary-emphasis", for="season_{{item.label}}")}}
+                  </div>
                 {% endfor %}
+            </fieldset>
             </p>
             <p>
-                <button type="submit" name="find_clothes" class="btn btn-primary">Найти одежду</button>
+                <button type="submit" name="find_clothes" class="btn btn-outline-warning">Найти одежду</button>
             </p>
         </div>
         <div class="col-md-6">
             {% if clothes %}
-                <p>Возможная одежда</p>
-                {% for item in clothes %}
-                    <p>
-                        <input type="radio" id="item_{{item.id}}" name="item_id" value="{{item.id}}">
-                        <label for="item_{{item.id}}">{{item.name}}</label>
-                        <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px; margin-left: 20px;" class="item-image">
-                    </p>
-                {% endfor %}
+                <fieldset class="mb-4 text-start">
+                    <legend class="fs-5 text-secondary-emphasis">Одежда</legend>
+                        {% for item in clothes %}
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="item_{{item.id}}" name="item_id" value="{{item.id}}">
+                                <label class="form-check-label text-secondary-emphasis" for="item_{{item.id}}">{{item.name}}</label>
+                                <img src="{{path}}/{{item.image}}" style="height: 350px; width: 400px; margin-left: 20px;" class="item-image">
+                            </p>
+                            </div>
+                        {% endfor %}
+                 </fieldset>
                 <br>
-                <input type="submit" value="Добавить" class="btn btn-primary">
+                <button type="submit" class="btn btn-outline-warning">Добавить</button>
             {% endif %}
         </div>
     </div>
