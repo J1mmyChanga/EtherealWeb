@@ -98,7 +98,7 @@ def looks():
     param['sportswear'] = []
     session = db_session.create_session()
     clothes = session.get(Users, current_user.id).clothes
-    for look in session.query(Looks).all():
+    for look in session.query(Looks).filter((Looks.sex == current_user.sex) | (Looks.sex == 3)):
         item_list = []
         for item in look.clothes:
             if item in clothes:
