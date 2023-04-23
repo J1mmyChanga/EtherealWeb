@@ -213,3 +213,5 @@ l28.clothes.append(session.get(Clothes, 33))
 l28.clothes.append(session.get(Clothes, 21))
 l28.clothes.append(session.get(Clothes, 36))
 session.commit()
+
+###https://prezi.com/view/uOrQOiPKCQIV0JXzPk7q/###

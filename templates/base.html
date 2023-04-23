@@ -17,30 +17,59 @@
         <span class="fs-2 fw-bold text-uppercase">Ethereal</span>
         </a>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 fs-5 fw-semibold">
-          <li><a href="/looks_feed" class="nav-link px-4 text-white">Лента образов</a></li>
-          <li><a href="/wardrobe" class="nav-link px-4 text-white">Мой гардероб</a></li>
-          <li><a href="/favourite" class="nav-link px-4 text-white">Избранное</a></li>
-          <li><a href="/looks" class="nav-link px-4 text-white">Мои образы</a></li>
-        </ul>
+        {% if current_user.is_authenticated %}
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 fs-5 fw-semibold">
+              <li><a href="/looks_feed" class="nav-link px-4 text-white">Лента образов</a></li>
+              <li><a href="/wardrobe" class="nav-link px-4 text-white">Мой гардероб</a></li>
+              <li><a href="/favourite" class="nav-link px-4 text-white">Избранное</a></li>
+              <li><a href="/looks" class="nav-link px-4 text-white">Мои образы</a></li>
+            </ul>
+        {% else %}
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 fs-5 fw-semibold">
+              <li><a href="/" class="nav-link px-4 text-white">Лента образов</a></li>
+              <li><a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropLive" class="nav-link px-4 text-white">Мой гардероб</a></li>
+              <li><a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropLive" class="nav-link px-4 text-white">Избранное</a></li>
+              <li><a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropLive" class="nav-link px-4 text-white">Мои образы</a></li>
+            </ul>
+        {% endif %}
 
-        <div class="text-end">
-          {% if current_user.is_authenticated %}
-                <div class="dropdown text-end">
-                    <a href="#" class="d-block link-secondary text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="fs-4 mx-1">{{ current_user.nickname }}</span>
-                        <img src="/static/img/avatars/image{{ current_user.id }}.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                    </a>
-                    <ul class="dropdown-menu text-small" style="">
-                        <li><a class="dropdown-item" href="/edit_profile">Настройка</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/logout">Выйти</a></li>
-                    </ul>
+            <div class="modal fade" id="staticBackdropLive" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" style="display: none;" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLiveLabel">Войдите в свой аккаунт</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Для того, чтобы иметь возможность использовать все функции сервиса, необходимо авторизоваться.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Понял</button>
+                  </div>
                 </div>
-          {% else %}
-                <a type="button" class="btn btn-outline-light me-2" href="/login">Войти</a>
-                <a type="button" class="btn btn-outline-warning" href="/register">Зарегистрироваться</a>
-            {% endif %}
+              </div>
+            </div>
+
+            <div class="text-end">
+              {% if current_user.is_authenticated %}
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-block link-secondary text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="fs-4 mx-1">{{ current_user.nickname }}</span>
+                            <img src="/static/img/avatars/image{{ current_user.id }}.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small" style="">
+                            <li><a class="dropdown-item" href="/edit_profile">Настройка</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout">Выйти</a></li>
+                        </ul>
+                    </div>
+              {% else %}
+                    <a type="button" class="btn btn-outline-light me-2" href="/login">Войти</a>
+                    <a type="button" class="btn btn-outline-warning" href="/register">Зарегистрироваться</a>
+              {% endif %}
+            </div>
+        </div>
+        </div>
 </header>
 <main role="main" class="container">
     {% block content %}{% endblock %}

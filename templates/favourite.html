@@ -44,15 +44,24 @@
                   </ul>
                   <div class="collapse" id="item_{{item.id}}">
                     <br>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
+                    {% if item.description %}
+                        {{ item.description }}
+                    {% else %}
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
+                    {% endif %}
                   </div>
                 </div>
               </div>
             </div>
             </div>
-            <div class="card-footer text-end">
-                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
-                <a class="btn-close mt-2" type="button" href="/delete_favourite/{{ item.id }}"></a>
+            {% if item.user_custom %}
+                {% set type = 'custom_looks' %}
+            {% else %}
+                {% set type = 'looks' %}
+            {% endif %}
+            <div class="card-footer d-flex align-items-center justify-content-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 me-2 my-2" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+                <a class="btn-close" type="button" href="/delete_favourite/{{type}}/{{ item.id }}"></a>
             </div>
             </div>
       {% endfor %}
@@ -101,16 +110,24 @@
                   </ul>
                   <div class="collapse" id="item_{{item.id}}">
                     <br>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
-                  </div>
+                    {% if item.description %}
+                        {{ item.description }}
+                    {% else %}
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
+                    {% endif %}                  </div>
                 </div>
               </div>
             </div>
             </div>
-              <div class="card-footer text-end">
-                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
-                <a class="btn-close mt-2" type="button" href="/delete_favourite/{{ item.id }}"></a>
-              </div>
+              {% if item.user_custom %}
+                {% set type = 'custom_looks' %}
+            {% else %}
+                {% set type = 'looks' %}
+            {% endif %}
+            <div class="card-footer d-flex align-items-center justify-content-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 me-2 my-2" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+                <a class="btn-close" type="button" href="/delete_favourite/{{type}}/{{ item.id }}"></a>
+            </div>
             </div>
       {% endfor %}
       </div>
@@ -158,15 +175,23 @@
                   </ul>
                   <div class="collapse" id="item_{{item.id}}">
                     <br>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
-                  </div>
+                    {% if item.description %}
+                        {{ item.description }}
+                    {% else %}
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae commodi dolor ea et eum hic inventore omnis pariatur, porro quos sed similique vitae. Atque dolore ex id molestiae temporibus.
+                    {% endif %}                  </div>
                 </div>
               </div>
             </div>
             </div>
-            <div class="card-footer text-end">
-                <button class="btn btn-outline-warning dropdown-toggle py-0 mb-3 me-2" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
-                <a class="btn-close mt-2" type="button" href="/delete_favourite/{{ item.id }}"></a>
+            {% if item.user_custom %}
+                {% set type = 'custom_looks' %}
+            {% else %}
+                {% set type = 'looks' %}
+            {% endif %}
+            <div class="card-footer d-flex align-items-center justify-content-end">
+                <button class="btn btn-outline-warning dropdown-toggle py-0 me-2 my-2" data-bs-toggle="collapse" data-bs-target="#item_{{item.id}}" aria-expanded="false" aria-controls="item_{{item.id}}">Подробнее</button>
+                <a class="btn-close" type="button" href="/delete_favourite/{{type}}/{{ item.id }}"></a>
             </div>
             </div>
       {% endfor %}

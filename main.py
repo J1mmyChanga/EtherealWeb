@@ -66,6 +66,7 @@ def add_clothes():
         if selected_item_id:
             user.clothes.append(session.get(Clothes, selected_item_id))
             session.commit()
+    print(clothes)
     param['title'] = 'Добавление одежды'
     param['clothes'] = clothes
     param['form'] = form
@@ -96,7 +97,7 @@ def looks():
     param['business'] = []
     param['sportswear'] = []
     session = db_session.create_session()
-    clothes = session.query(Users).get(current_user.id).clothes
+    clothes = session.get(Users, current_user.id).clothes
     for look in session.query(Looks).all():
         item_list = []
         for item in look.clothes:
@@ -231,7 +232,7 @@ def favourite():
     param['sportswear'] = []
     param['path'] = url_for('static', filename='img/clothes_def')
     session = db_session.create_session()
-    favourites = session.get(Users, current_user.id).looks
+    favourites = session.get(Users, current_user.id).favourite_looks + session.get(Users, current_user.id).favourite_custom_looks
     for item in favourites:
         if item.style == 1:
             param['business'].append(item)
@@ -245,29 +246,52 @@ def favourite():
 
 @app.route('/add_favourite/<int:id>', methods=['GET', 'POST'])
 @login_required
-def add_favourite(id):
+def add_favourite_from_looks(id):
     session = db_session.create_session()
     look = session.get(Looks, id)
     favourites = session.get(Users, current_user.id)
     if look:
-        favourites.looks.append(look)
+        favourites.favourite_looks.append(look)
         session.commit()
     else:
         abort(404)
-    return redirect('/looks')
+    return redirect(f'/looks')
 
 
-@app.route('/delete_favourite/<int:id>', methods=['GET', 'POST'])
+@app.route('/add_favourite_custom/<int:id>', methods=['GET', 'POST'])
 @login_required
-def delete_favourite(id):
+def add_favourite_from_feed(id):
     session = db_session.create_session()
-    look = session.get(Looks, id)
+    look = session.get(CustomLooks, id)
     favourites = session.get(Users, current_user.id)
     if look:
-        favourites.looks.remove(look)
+        favourites.favourite_custom_looks.append(look)
         session.commit()
     else:
         abort(404)
+    return redirect(f'/looks_feed')
+
+
+@app.route('/delete_favourite/<string:type>/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_favourite(type, id):
+    session = db_session.create_session()
+    if type == 'looks':
+        look = session.get(Looks, id)
+        favourites = session.get(Users, current_user.id)
+        if look:
+            favourites.favourite_looks.remove(look)
+            session.commit()
+        else:
+            abort(404)
+    else:
+        look = session.get(CustomLooks, id)
+        favourites = session.get(Users, current_user.id)
+        if look:
+            favourites.favourite_custom_looks.remove(look)
+            session.commit()
+        else:
+            abort(404)
     return redirect('/favourite')
 
 
