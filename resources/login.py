@@ -23,7 +23,7 @@ class LoginResource(Resource):
                 "id": user.id,
                 "nickname": user.nickname,
                 "mail": user.email,
-                "image": base64.b64encode(user.image).decode("utf-8")
+                "image": base64.b64encode(open("." + user.image, "rb").read()).decode("utf-8")
             })
 
         return jsonify({"err": "Wrong password"})

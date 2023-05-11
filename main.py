@@ -17,10 +17,8 @@ from forms.clothes import ClothesForm
 from resources import LoginResource, WardrobeResource
 from forms.custom_looks import CustomLooksForm
 
-from resources import LoginResource
-
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+app.config["SECRET_KEY"] = 'yandexlyceum_secret_key'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -29,15 +27,18 @@ api = Api(app)
 api.add_resource(LoginResource, "/api/login/")
 api.add_resource(WardrobeResource, "/api/wardrobe/")
 
+db_session.global_init('db/ethereal.db')
+
 
 @app.route('/wardrobe')
 @login_required
 def wardrobe():
-    param = {}
-    param['title'] = 'Мой гардероб'
-    param['outer'] = []
-    param['top'] = []
-    param['lower'] = []
+    param = {
+        "title": "Мой гардероб",
+        "outer": [],
+        "top": [],
+        "lower": []
+    }
     session = db_session.create_session()
     clothes = session.get(Users, current_user.id).clothes
     for item in clothes:
@@ -149,13 +150,7 @@ def create_looks():
     else:
         custom_look = session_.query(CustomLooks).filter(CustomLooks.user == current_user.id).all()[-1]
     form = CustomLooksForm()
-    param = {}
-    param['title'] = 'Создание образа'
-    param['form'] = form
-    param['custom_look'] = custom_look
-    param['outer'] = []
-    param['top'] = []
-    param['lower'] = []
+    param = {'title': 'Создание образа', 'form': form, 'custom_look': custom_look, 'outer': [], 'top': [], 'lower': []}
     all_clothes = session_.query(Clothes).all()
     for item in all_clothes:
         if item.type == 1:
@@ -191,7 +186,6 @@ def delete_looks(id):
     else:
         abort(404)
     return redirect('/looks_feed')
-
 
 
 @app.route('/add_clothes_to_looks/<int:look_id>/<int:clothes_id>', methods=['GET', 'POST'])
@@ -232,7 +226,8 @@ def favourite():
     param['sportswear'] = []
     param['path'] = url_for('static', filename='img/clothes_def')
     session = db_session.create_session()
-    favourites = session.get(Users, current_user.id).favourite_looks + session.get(Users, current_user.id).favourite_custom_looks
+    favourites = session.get(Users, current_user.id).favourite_looks + session.get(Users,
+                                                                                   current_user.id).favourite_custom_looks
     for item in favourites:
         if item.style == 1:
             param['business'].append(item)
@@ -241,7 +236,6 @@ def favourite():
         elif item.style == 3:
             param['sportswear'].append(item)
     return render_template('favourite.html', **param)
-    
 
 
 @app.route('/add_favourite/<int:id>', methods=['GET', 'POST'])
@@ -398,7 +392,6 @@ def load_user(user_id):
 
 
 def main():
-    db_session.global_init('db/ethereal.db')
     session = db_session.create_session()
     session.commit()
     WSGIRequestHandler.protocol_version = "HTTP/1.1"
