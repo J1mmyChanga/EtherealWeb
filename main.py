@@ -14,7 +14,7 @@ from data.custom_looks import CustomLooks
 
 from forms.user import RegisterForm, LoginForm, EditForm
 from forms.clothes import ClothesForm
-from resources import LoginResource, WardrobeResource
+from resources import *
 from forms.custom_looks import CustomLooksForm
 
 app = Flask(__name__)
@@ -24,6 +24,9 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 api = Api(app)
+api.add_resource(SetClothesInWardrobe, "/api/addInWardrobeResource/")
+api.add_resource(GetClothesFromWardrobeResource, "/api/clothesByParams/")
+api.add_resource(GetClothesInfoResource, "/api/ci/")
 api.add_resource(LoginResource, "/api/login/")
 api.add_resource(WardrobeResource, "/api/wardrobe/")
 
