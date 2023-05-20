@@ -18,12 +18,13 @@ from resources import *
 from forms.custom_looks import CustomLooksForm
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = 'yandexlyceum_secret_key'
+app.config["SECRET_KEY"] = "Bebrochka666"
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 api = Api(app)
+api.add_resource(GetAllLooks, "/api/getLooks/")
 api.add_resource(SetClothesInWardrobe, "/api/addInWardrobeResource/")
 api.add_resource(GetClothesFromWardrobeResource, "/api/clothesByParams/")
 api.add_resource(GetClothesInfoResource, "/api/ci/")
@@ -95,24 +96,21 @@ def clothes_delete(id):
 @app.route('/looks')
 @login_required
 def looks():
-    param = {}
-    looks = []
-    param['casual'] = []
-    param['business'] = []
-    param['sportswear'] = []
+    param = {'casual': [], 'business': [], 'sportswear': []}
+    all_looks = []
     session = db_session.create_session()
     clothes = session.get(Users, current_user.id).clothes
     for look in session.query(Looks).filter((Looks.sex == current_user.sex) | (Looks.sex == 3)):
         item_list = []
         for item in look.clothes:
-            if item in clothes:
-                item_list.append(item)
-                continue
-            else:
+            if item not in clothes:
                 break
+
+            item_list.append(item)
+
         if len(item_list) >= 2:
-            looks.append(look)
-    for item in looks:
+            all_looks.append(look)
+    for item in all_looks:
         if item.style == 1:
             param['business'].append(item)
         elif item.style == 2:
@@ -222,12 +220,8 @@ def delete_clothes_in_looks(look_id, clothes_id):
 @app.route('/favourite')
 @login_required
 def favourite():
-    param = {}
-    param['title'] = 'Избранное'
-    param['casual'] = []
-    param['business'] = []
-    param['sportswear'] = []
-    param['path'] = url_for('static', filename='img/clothes_def')
+    param = {'title': 'Избранное', 'casual': [], 'business': [], 'sportswear': [],
+             'path': url_for('static', filename='img/clothes_def')}
     session = db_session.create_session()
     favourites = session.get(Users, current_user.id).favourite_looks + session.get(Users,
                                                                                    current_user.id).favourite_custom_looks
