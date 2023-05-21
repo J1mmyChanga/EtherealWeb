@@ -1,34 +1,29 @@
 import base64
-from typing import List
 
 from flask_restful import Resource
 from data import db_session
 from flask import jsonify, request
 
-from data.looks import Looks
 from data.season import Season
 from data.style import Style
 from data.type import Type
 from data.users import Users
 
 
-class GetAllLooks(Resource):
+class GetFavorite(Resource):
     @staticmethod
     def post():
         to_return = []
-
         session = db_session.create_session()
-        user: Users = session.query(Users).filter(Users.id == request.json["user_id"]).first()
-        looks: List[Looks] = session.query(Looks).filter((Looks.sex == user.sex) | (Looks.sex == 3))
+        user = session.get(Users, request.json["user_id"])
 
-        for look in looks:
-            style: Style = session.query(Style).filter(Style.id == look.style).first()
-            season: Season = session.query(Season).filter(Season.id == look.season).first()
-
+        for look in user.favourite_looks:
+            style = session.get(Style, look.style)
+            season = session.get(Season, look.season)
             all_clothes = []
 
             for clothes in look.clothes:
-                clothes_type: Type = session.query(Type).filter(Type.id == clothes.type).first()
+                clothes_type = session.get(Type, clothes.type)
 
                 all_clothes.append({
                     "id": clothes.id,
@@ -63,14 +58,3 @@ class GetAllLooks(Resource):
             })
 
         return jsonify(to_return)
-
-
-class AddToFavoriteResource(Resource):
-    @staticmethod
-    def post():
-        session = db_session.create_session()
-
-        user: Users = session.query(Users).filter(Users.id == request.json["user_id"]).first()
-        look = session.query(Looks).filter(Looks.id == request.json["look_id"]).first()
-        user.favourite_looks.append(look)
-        session.commit()

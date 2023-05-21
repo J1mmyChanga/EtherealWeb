@@ -24,6 +24,7 @@ class WardrobeResource(Resource):
 
             to_return.append({
                 "id": item.id,
+                "name": item.name,
                 "image": base64.b64encode(open(f"./static/img/clothes_def/{item.image}", "rb").read()).decode("utf-8"),
                 "type": {
                     "id": clothes_type.id,
@@ -41,14 +42,14 @@ class WardrobeResource(Resource):
 
 class GetClothesInfoResource(Resource):
     @staticmethod
-    def post():
+    def get():
         session = db_session.create_session()
         types = session.query(Type).all()
         seasons = session.query(Season).all()
 
         return jsonify({
             "types": [{"id": t.id, "name": t.type} for t in types],
-            "seasons": [{"id": s.id, "name": s.type} for s in seasons],
+            "seasons": [{"id": s.id, "name": s.season, "look_season": s.look_season} for s in seasons],
         })
 
 
@@ -61,7 +62,7 @@ class GetClothesFromWardrobeResource(Resource):
         clothes_type = session.query(Type).filter(Type.id == request.json["type_id"]).first()
         clothes_season = session.query(Season).filter(Season.id == request.json["season_id"]).first()
         all_clothes = session.query(Clothes).filter(Clothes.type == clothes_type.id,
-                                                    Clothes.season == clothes_season.id).first()
+                                                    Clothes.season == clothes_season.id)
 
         for clothes in all_clothes:
             to_return.append({
@@ -87,6 +88,6 @@ class SetClothesInWardrobe(Resource):
     @staticmethod
     def post():
         session = db_session.create_session()
-        user: Users = session.query(Users).filter(Users.id == request.json["user_id"]).first()
-        user.clothes.append(request.json["clothes_id"])
+        user = session.get(Users, request.json["user_id"])
+        user.clothes.append(session.get(Clothes, request.json["clothes_id"]))
         session.commit()

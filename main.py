@@ -24,6 +24,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 api = Api(app)
+api.add_resource(AddToFavoriteResource, "/api/addToFavorite/")
 api.add_resource(GetAllLooks, "/api/getLooks/")
 api.add_resource(SetClothesInWardrobe, "/api/addInWardrobeResource/")
 api.add_resource(GetClothesFromWardrobeResource, "/api/clothesByParams/")
