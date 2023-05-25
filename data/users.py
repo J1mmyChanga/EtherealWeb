@@ -19,12 +19,12 @@ class Users(SqlAlchemyBase, UserMixin):
     sex_ = orm.relationship("Sex", backref="users")
 
     favourite_looks = orm.relationship("Looks",
-                             secondary="user_to_favourite_looks",
-                             backref="user_looks")
+                                       secondary="user_to_favourite_looks",
+                                       backref="user_looks")
 
     favourite_custom_looks = orm.relationship("CustomLooks",
-                             secondary="user_to_favourite_custom_looks",
-                             backref="user_custom")
+                                              secondary="user_to_favourite_custom_looks",
+                                              backref="user_custom")
 
     clothes = orm.relationship("Clothes",
                                secondary="user_to_clothes",

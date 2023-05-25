@@ -4,6 +4,7 @@ from flask_restful import Resource
 from data import db_session
 from flask import jsonify, request
 
+from data.looks import Looks
 from data.season import Season
 from data.style import Style
 from data.type import Type
@@ -58,3 +59,12 @@ class GetFavorite(Resource):
             })
 
         return jsonify(to_return)
+
+
+class RemoveFavoriteLookResource(Resource):
+    @staticmethod
+    def post():
+        session = db_session.create_session()
+        user = session.get(Users, request.json["user_id"])
+        user.favourite_looks.remove(session.get(Looks, request.json["look_id"]))
+        session.commit()
