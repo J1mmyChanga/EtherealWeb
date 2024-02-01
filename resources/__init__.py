@@ -3,3 +3,4 @@ from .wardrobe import WardrobeResource, GetClothesInfoResource, GetClothesFromWa
 from .look import GetAllLooks, AddToFavoriteResource, GetCustomLooksResource
 from .favorite import GetFavorite, RemoveFavoriteLookResource
 from .custom_looks import GetCustomLooksResource
+from .register import RegisterResource

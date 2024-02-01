@@ -33,6 +33,7 @@ api.add_resource(SetClothesInWardrobe, "/api/addInWardrobeResource/")
 api.add_resource(GetClothesFromWardrobeResource, "/api/clothesByParams/")
 api.add_resource(GetClothesInfoResource, "/api/ci/")
 api.add_resource(LoginResource, "/api/login/")
+api.add_resource(RegisterResource, "/api/register")
 api.add_resource(WardrobeResource, "/api/wardrobe/")
 
 db_session.global_init('db/ethereal.db')
